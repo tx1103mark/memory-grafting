@@ -68,6 +68,7 @@ def main():
     p.add_argument('--data-dir',type=Path,default=Path('data/processed'))
     p.add_argument('--engram-buckets',type=int,default=0)
     p.add_argument('--shortconv-kernel',type=int,default=0)
+    p.add_argument('--disable-teacher-memory',action='store_true')
     p.add_argument('--stop-after-steps',type=int,help='Debug interruption; saves last.pt without marking the run complete')
     a = p.parse_args()
     if a.tokens <= 0 or a.micro_batch <= 0 or a.accumulation <= 0:
@@ -93,7 +94,8 @@ def main():
         if memory_manifest['key_sha256'] != file_hash(processed/'keys.json'):
             raise ValueError('Memory table was built with different key ordering')
     model = load_model(a.root/'models/student', a.group, memory_dir/'table.pt', a.device, not a.no_checkpointing,
-                       layer=a.student_block-1,engram_buckets=a.engram_buckets,shortconv_kernel=a.shortconv_kernel)
+                       layer=a.student_block-1,engram_buckets=a.engram_buckets,shortconv_kernel=a.shortconv_kernel,
+                       teacher_memory=not a.disable_teacher_memory)
     if model.adapter is not None:
         with torch.no_grad():
             model.adapter.alpha.fill_(a.alpha_init)
@@ -113,7 +115,8 @@ def main():
                     memory_hash=file_hash(memory_dir/'manifest.json') if a.group in ('G','R','S') else None,
                     trainable_parameters=sum(p.numel() for p in model.parameters() if p.requires_grad),
                     forward='explicit stock Qwen3 blocks; full sequence; no KV cache', learning_rates={'lora':2e-5,'adapter':1e-4})
-    manifest.update(data_dir=str(a.data_dir),engram_buckets=a.engram_buckets,shortconv_kernel=a.shortconv_kernel)
+    manifest.update(data_dir=str(a.data_dir),engram_buckets=a.engram_buckets,shortconv_kernel=a.shortconv_kernel,
+                    disable_teacher_memory=a.disable_teacher_memory)
     if a.alpha_init != .001:
         manifest['alpha_init'] = a.alpha_init
     if a.student_block != 3 or a.memory_dir != Path('memory'):

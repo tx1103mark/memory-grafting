@@ -1,7 +1,7 @@
 import copy
 import torch
 from transformers import Qwen3Config, Qwen3ForCausalLM
-from graft.model import GraftedLM, trainable_state, restore_trainable, load_model
+from graft.model import MemoryAdapter, GraftedLM, trainable_state, restore_trainable, load_model
 from graft.data import lookup, chunks, collate
 from scripts.train import loss_sum
 
@@ -106,3 +106,14 @@ def test_engram_fallback_shortconv_is_causal_and_trainable():
     with torch.no_grad():
         a=model(x,mask,mids);b=model(torch.tensor([[1,2,3,8]]),mask,mids)
     torch.testing.assert_close(a[:,:3],b[:,:3],atol=1e-6,rtol=1e-5)
+
+
+def test_teacher_memory_can_be_disabled_while_fallback_remains_active():
+    torch.manual_seed(5)
+    adapter=MemoryAdapter(7,8,engram_buckets=31,engram_dim=4,teacher_memory=False)
+    h=torch.randn(1,4,8); memory=torch.randn(1,4,7); ids=torch.tensor([[1,2,3,4]])
+    hit=torch.ones(1,4,dtype=torch.bool); valid=torch.ones_like(hit)
+    y1=adapter(h,memory,hit,ids,valid)
+    y2=adapter(h,torch.randn_like(memory),hit,ids,valid)
+    torch.testing.assert_close(y1,y2)
+    assert not torch.equal(y1,h)

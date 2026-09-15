@@ -42,7 +42,8 @@ def main():
     model=load_model(a.root/'models/student',group,memory_dir/'table.pt',a.device,False,
                      layer=saved['manifest'].get('student_block',3)-1 if saved else 2,
                      engram_buckets=saved['manifest'].get('engram_buckets',0) if saved else 0,
-                     shortconv_kernel=saved['manifest'].get('shortconv_kernel',0) if saved else 0)
+                     shortconv_kernel=saved['manifest'].get('shortconv_kernel',0) if saved else 0,
+                     teacher_memory=not saved['manifest'].get('disable_teacher_memory',False) if saved else True)
     if saved:
         restore_trainable(model,saved['model'])
     tok=AutoTokenizer.from_pretrained(a.root/'models/student',local_files_only=True)

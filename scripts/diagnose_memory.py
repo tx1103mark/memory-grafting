@@ -22,7 +22,8 @@ def main():
     model=load_model('models/student',saved['manifest']['group'],memory_dir/'table.pt','cuda',False,
                      layer=saved['manifest'].get('student_block',3)-1,
                      engram_buckets=saved['manifest'].get('engram_buckets',0),
-                     shortconv_kernel=saved['manifest'].get('shortconv_kernel',0)).eval()
+                     shortconv_kernel=saved['manifest'].get('shortconv_kernel',0),
+                     teacher_memory=not saved['manifest'].get('disable_teacher_memory',False)).eval()
     restore_trainable(model,saved['model'])
     tok=AutoTokenizer.from_pretrained('models/student',local_files_only=True)
     data=load_from_disk(str(Path(saved['manifest'].get('data_dir','data/processed'))/'validation'))
