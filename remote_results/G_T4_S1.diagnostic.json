@@ -1,0 +1,35 @@
+{
+  "checkpoint": "/mnt/disk0/home/tysearch/ngram-embedding/runs/long_G_T4_S1/last.pt",
+  "tokens": 100000,
+  "loss": {
+    "normal": {
+      "hit": {
+        "mean": 2.9705867987807273,
+        "count": 26213
+      },
+      "miss": {
+        "mean": 2.9944864901702504,
+        "count": 73787
+      }
+    },
+    "zero": {
+      "hit": {
+        "mean": 2.9712404665777603,
+        "count": 26213
+      },
+      "miss": {
+        "mean": 2.9945666920774126,
+        "count": 73787
+      }
+    }
+  },
+  "activation_document_mean": {
+    "gate_mean": 0.17651761813251765,
+    "gate_p50": 0.060066899906643885,
+    "gate_p90": 0.5424556653671617,
+    "delta_ratio_mean": 0.013040071022040491,
+    "effective_delta_ratio_mean": 0.01301239936568793,
+    "rounded_zero_fraction": 0.5690941724601208
+  },
+  "note": "Activation summaries average per-document statistics. Hit at t predicts target t+1. Miss loss can change through earlier injected context."
+}

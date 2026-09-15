@@ -1,0 +1,35 @@
+{
+  "checkpoint": "/mnt/disk0/home/tysearch/ngram-embedding/runs/semantic_S_T8_S12_seed44/last.pt",
+  "tokens": 100000,
+  "loss": {
+    "normal": {
+      "hit": {
+        "mean": 2.9713023097722573,
+        "count": 26213
+      },
+      "miss": {
+        "mean": 2.995353504704979,
+        "count": 73787
+      }
+    },
+    "zero": {
+      "hit": {
+        "mean": 2.9716660121894005,
+        "count": 26213
+      },
+      "miss": {
+        "mean": 2.99523819759994,
+        "count": 73787
+      }
+    }
+  },
+  "activation_document_mean": {
+    "gate_mean": 0.12416019873231049,
+    "gate_p50": 0.05398687282764671,
+    "gate_p90": 0.3217495967377752,
+    "delta_ratio_mean": 0.0006134361351938643,
+    "effective_delta_ratio_mean": 0.0005629968414088592,
+    "rounded_zero_fraction": 0.8098464272166258
+  },
+  "note": "Activation summaries average per-document statistics. Hit at t predicts target t+1. Miss loss can change through earlier injected context."
+}

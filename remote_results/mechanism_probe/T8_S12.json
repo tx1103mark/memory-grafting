@@ -1,0 +1,16 @@
+{
+  "samples": 20000,
+  "student_block": 12,
+  "memory_dir": "memory/T8",
+  "linear_correct": {
+    "cosine": 0.9088243246078491,
+    "normalized_mse": 0.00017807762196753174
+  },
+  "linear_shuffled": {
+    "cosine": 0.6636644601821899,
+    "normalized_mse": 0.0006569056422449648
+  },
+  "cka_correct": 0.11141429841518402,
+  "cka_shuffled": 1.527572203485761e-05,
+  "note": "Separate identical-recipe linear maps; held-out rows. Shuffling preserves teacher row multiset."
+}

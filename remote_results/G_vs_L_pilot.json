@@ -1,0 +1,15 @@
+{
+  "subject_macro_delta_pp": -0.25278430353493325,
+  "subject_macro_delta_95ci_pp": [
+    -1.0361227509416255,
+    0.530306773762619
+  ],
+  "corrected": 15,
+  "regressed": 17,
+  "correction_rate": 0.022590361445783132,
+  "regression_rate": 0.024926686217008796,
+  "examples": 1346,
+  "bootstrap_replicates": 10000,
+  "seed": 42,
+  "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+}

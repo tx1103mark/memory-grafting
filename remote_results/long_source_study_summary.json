@@ -1,0 +1,338 @@
+[
+  {
+    "budget_million": 2,
+    "teacher_block": 4,
+    "student_block": 1,
+    "G": {
+      "accuracy": 0.5170876671619614,
+      "macro": 0.5085677056641015
+    },
+    "R": {
+      "accuracy": 0.5170876671619614,
+      "macro": 0.5057198586493212
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": 0.2847847014780305,
+      "subject_macro_delta_95ci_pp": [
+        -0.564962604295224,
+        1.1281160138428459
+      ],
+      "corrected": 17,
+      "regressed": 17,
+      "correction_rate": 0.026153846153846153,
+      "regression_rate": 0.02442528735632184,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 2,
+    "teacher_block": 8,
+    "student_block": 1,
+    "G": {
+      "accuracy": 0.5178306092124815,
+      "macro": 0.5077721483957953
+    },
+    "R": {
+      "accuracy": 0.5170876671619614,
+      "macro": 0.5059515185295768
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": 0.18206298662185502,
+      "subject_macro_delta_95ci_pp": [
+        -0.6348830041072379,
+        0.9805672200031476
+      ],
+      "corrected": 16,
+      "regressed": 15,
+      "correction_rate": 0.024615384615384615,
+      "regression_rate": 0.021551724137931036,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 2,
+    "teacher_block": 12,
+    "student_block": 1,
+    "G": {
+      "accuracy": 0.5178306092124815,
+      "macro": 0.5076367829327084
+    },
+    "R": {
+      "accuracy": 0.5141158989598811,
+      "macro": 0.5025980165642203
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": 0.5038766368488097,
+      "subject_macro_delta_95ci_pp": [
+        -0.5903467079633634,
+        1.5924301172550983
+      ],
+      "corrected": 28,
+      "regressed": 23,
+      "correction_rate": 0.04281345565749235,
+      "regression_rate": 0.033236994219653176,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 2,
+    "teacher_block": 6,
+    "student_block": 6,
+    "G": {
+      "accuracy": 0.5178306092124815,
+      "macro": 0.5066537255149903
+    },
+    "R": {
+      "accuracy": 0.513372956909361,
+      "macro": 0.5020916570454549
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": 0.4562068469535421,
+      "subject_macro_delta_95ci_pp": [
+        -0.34137916235358484,
+        1.2486381960833193
+      ],
+      "corrected": 19,
+      "regressed": 13,
+      "correction_rate": 0.02900763358778626,
+      "regression_rate": 0.01881331403762663,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 5,
+    "teacher_block": 4,
+    "student_block": 1,
+    "G": {
+      "accuracy": 0.5185735512630015,
+      "macro": 0.5084197258352166
+    },
+    "R": {
+      "accuracy": 0.5156017830609212,
+      "macro": 0.507781828425116
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": 0.0637897410100515,
+      "subject_macro_delta_95ci_pp": [
+        -0.9010367550408571,
+        0.9790363982577165
+      ],
+      "corrected": 23,
+      "regressed": 19,
+      "correction_rate": 0.0352760736196319,
+      "regression_rate": 0.027377521613832854,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 5,
+    "teacher_block": 8,
+    "student_block": 1,
+    "G": {
+      "accuracy": 0.5156017830609212,
+      "macro": 0.5052107848818019
+    },
+    "R": {
+      "accuracy": 0.5156017830609212,
+      "macro": 0.5044142020414877
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": 0.0796582840314189,
+      "subject_macro_delta_95ci_pp": [
+        -1.0234576477489705,
+        1.1706961936626978
+      ],
+      "corrected": 23,
+      "regressed": 23,
+      "correction_rate": 0.0352760736196319,
+      "regression_rate": 0.03314121037463977,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 5,
+    "teacher_block": 12,
+    "student_block": 1,
+    "G": {
+      "accuracy": 0.5170876671619614,
+      "macro": 0.5078713945099327
+    },
+    "R": {
+      "accuracy": 0.5118870728083209,
+      "macro": 0.502760653284932
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": 0.5110741225000691,
+      "subject_macro_delta_95ci_pp": [
+        -0.6183294372095167,
+        1.6859030802792996
+      ],
+      "corrected": 30,
+      "regressed": 23,
+      "correction_rate": 0.045662100456621,
+      "regression_rate": 0.033381712626995644,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 5,
+    "teacher_block": 6,
+    "student_block": 6,
+    "G": {
+      "accuracy": 0.513372956909361,
+      "macro": 0.5015420596539756
+    },
+    "R": {
+      "accuracy": 0.5193164933135216,
+      "macro": 0.5090093269689931
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": -0.7467267315017521,
+      "subject_macro_delta_95ci_pp": [
+        -1.6315313778272196,
+        0.09966195983283972
+      ],
+      "corrected": 12,
+      "regressed": 20,
+      "correction_rate": 0.01854714064914992,
+      "regression_rate": 0.02861230329041488,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 10,
+    "teacher_block": 4,
+    "student_block": 1,
+    "G": {
+      "accuracy": 0.5185735512630015,
+      "macro": 0.5087022251968814
+    },
+    "R": {
+      "accuracy": 0.5208023774145617,
+      "macro": 0.5109889324441084
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": -0.22867072472269076,
+      "subject_macro_delta_95ci_pp": [
+        -1.2712342881185368,
+        0.768092987373162
+      ],
+      "corrected": 18,
+      "regressed": 21,
+      "correction_rate": 0.027906976744186046,
+      "regression_rate": 0.029957203994293864,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 10,
+    "teacher_block": 8,
+    "student_block": 1,
+    "G": {
+      "accuracy": 0.513372956909361,
+      "macro": 0.501635885712312
+    },
+    "R": {
+      "accuracy": 0.5163447251114414,
+      "macro": 0.5056082327889982
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": -0.3972347076686248,
+      "subject_macro_delta_95ci_pp": [
+        -1.4906517140567068,
+        0.7040373362923183
+      ],
+      "corrected": 21,
+      "regressed": 25,
+      "correction_rate": 0.03225806451612903,
+      "regression_rate": 0.03597122302158273,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 10,
+    "teacher_block": 12,
+    "student_block": 1,
+    "G": {
+      "accuracy": 0.5170876671619614,
+      "macro": 0.5077484564289537
+    },
+    "R": {
+      "accuracy": 0.5170876671619614,
+      "macro": 0.5057914614598211
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": 0.19569949691325408,
+      "subject_macro_delta_95ci_pp": [
+        -0.8703843705255333,
+        1.2484996102816983
+      ],
+      "corrected": 22,
+      "regressed": 22,
+      "correction_rate": 0.033846153846153845,
+      "regression_rate": 0.031609195402298854,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  },
+  {
+    "budget_million": 10,
+    "teacher_block": 6,
+    "student_block": 6,
+    "G": {
+      "accuracy": 0.512630014858841,
+      "macro": 0.5032393422373255
+    },
+    "R": {
+      "accuracy": 0.5193164933135216,
+      "macro": 0.5092469140810537
+    },
+    "vs_R": {
+      "subject_macro_delta_pp": -0.6007571843728221,
+      "subject_macro_delta_95ci_pp": [
+        -1.239191116523913,
+        -0.004914446122795704
+      ],
+      "corrected": 6,
+      "regressed": 15,
+      "correction_rate": 0.00927357032457496,
+      "regression_rate": 0.02145922746781116,
+      "examples": 1346,
+      "bootstrap_replicates": 10000,
+      "seed": 42,
+      "caveat": "Single-run paired example bootstrap does not measure training-seed variance."
+    }
+  }
+]

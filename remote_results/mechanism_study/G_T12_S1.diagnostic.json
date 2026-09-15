@@ -1,0 +1,41 @@
+{
+  "checkpoint": "/root/dataDisk/home/tysearch/ngram-embedding/runs/mechanism_G_T12_S1/last.pt",
+  "tokens": 100000,
+  "loss": {
+    "normal": {
+      "hit": {
+        "mean": 3.132729191907411,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.8421543415184063,
+        "count": 48916
+      }
+    },
+    "zero": {
+      "hit": {
+        "mean": 3.133318240188337,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.8426676666037665,
+        "count": 48916
+      }
+    }
+  },
+  "activation_document_mean": {
+    "fallback_delta_ratio_mean": 0.004563927133028526,
+    "fallback_effective_delta_ratio_mean": 0.00461449735591285,
+    "fallback_gate_mean": 0.1545905732868502,
+    "fallback_gate_p50": 0.11686284550084364,
+    "fallback_gate_p90": 0.32504609702217496,
+    "fallback_rounded_zero_fraction": 0.4000968615080686,
+    "hit_delta_ratio_mean": 0.013632162524099718,
+    "hit_effective_delta_ratio_mean": 0.013661893762823119,
+    "hit_gate_mean": 0.1307063906534806,
+    "hit_gate_p50": 0.060423720978050426,
+    "hit_gate_p90": 0.3448183284509902,
+    "hit_rounded_zero_fraction": 0.33978014894379865
+  },
+  "note": "Activation summaries average per-document statistics. Hit at t predicts target t+1. Miss loss can change through earlier injected context."
+}
