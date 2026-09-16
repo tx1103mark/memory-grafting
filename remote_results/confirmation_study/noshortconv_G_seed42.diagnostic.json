@@ -1,0 +1,41 @@
+{
+  "checkpoint": "/root/dataDisk/home/tysearch/ngram-embedding/runs/confirm_noshortconv_G_seed42/last.pt",
+  "tokens": 100000,
+  "loss": {
+    "normal": {
+      "hit": {
+        "mean": 3.132803295709898,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.8421377658025153,
+        "count": 48916
+      }
+    },
+    "zero": {
+      "hit": {
+        "mean": 3.133094018818619,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.8424219091229648,
+        "count": 48916
+      }
+    }
+  },
+  "activation_document_mean": {
+    "fallback_delta_ratio_mean": 0.004582942062254445,
+    "fallback_effective_delta_ratio_mean": 0.004633707037424487,
+    "fallback_gate_mean": 0.15459567396557772,
+    "fallback_gate_p50": 0.11683282649282041,
+    "fallback_gate_p90": 0.3247348769011614,
+    "fallback_rounded_zero_fraction": 0.399359333435161,
+    "hit_delta_ratio_mean": 0.012583520554081105,
+    "hit_effective_delta_ratio_mean": 0.012614901386976442,
+    "hit_gate_mean": 0.12194282746555021,
+    "hit_gate_p50": 0.05735286511480808,
+    "hit_gate_p90": 0.31081435769396343,
+    "hit_rounded_zero_fraction": 0.3416906866251222
+  },
+  "note": "Activation summaries average per-document statistics. Hit at t predicts target t+1. Miss loss can change through earlier injected context."
+}

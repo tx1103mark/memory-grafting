@@ -87,7 +87,13 @@ CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因
 4. 扩表、fallback 和 ShortConv 后，T12→S1 在 C-Eval 出现随训练预算增长的 G−S 优势，说明机制修复方向值得继续。
 5. 该优势未跨到 CMMLU，且机制修复版只有一个 seed。当前证据支持“存在任务相关信号”，尚不支持“稳定提升中文能力”。
 
-下一项最有判别力的实验是固定机制修复配置，运行 T12→S1 的 G/S/L 三到五个 seed，并预先指定 CMMLU 为主指标；同时分别关闭 fallback、ShortConv 和教师表，确认 C-Eval 信号来自哪一部分。如果多 seed 的 G−S 仍只出现在 C-Eval，应转向显式 alignment pretraining 或对表向量进行 whitening/contrastive projection。
+### 4.5 三种子确认与组件归因
+
+预注册确认实验已经完成，详细结果见 [CONFIRMATION_RESULTS.md](CONFIRMATION_RESULTS.md)。CMMLU 主指标上，full G/S/L 分别为 `50.122±0.682 / 50.829±0.020 / 50.902±0.101`，G−S 三个 seed 全为负，均值 −0.707 点。C-Eval 上 G−S 均值仅 +0.238 点，并在 seed 44 反转为 −1.176 点，上一轮单 seed 信号未稳定复现。
+
+组件消融显示，CMMLU 上完整机制比关闭 fallback 低 0.138 点，比关闭 ShortConv 低 0.177 点，三个 seed 方向一致；关闭教师表、仅保留 fallback 得到 50.866，接近 S/L 且方差更低。因此当前教师表不仅没有提供稳定知识收益，还引入了明显的训练方差。
+
+按预注册决策，本项目不再为相同 causal continued-pretraining 目标追加 token 或扫描更多层位。下一阶段转向显式 alignment pretraining，以及 teacher table 的 whitening/contrastive projection；只有离线 held-out key 上正确表稳定优于 shuffled，才重新进入下游训练。
 
 ## 6. 代码与结果索引
 
@@ -102,5 +108,6 @@ CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因
 - 机制实验调度：[scripts/run_mechanism_study.py](scripts/run_mechanism_study.py)
 - 原始汇总：[remote_results](remote_results)
 - 分阶段报告：[PILOT_RESULTS.md](PILOT_RESULTS.md)、[LAYER_RESULTS.md](LAYER_RESULTS.md)、[LONG_RESULTS.md](LONG_RESULTS.md)、[SEMANTIC_RESULTS.md](SEMANTIC_RESULTS.md)
+- 三种子机制确认：[CONFIRMATION_RESULTS.md](CONFIRMATION_RESULTS.md)
 
 模型权重、原始数据、冻结 memory table、checkpoint 和逐题 sample 文件因体积或数据授权原因不进入 Git；仓库保留生成脚本、manifest、汇总 JSON 和结论文档。
