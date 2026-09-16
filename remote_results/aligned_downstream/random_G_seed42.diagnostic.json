@@ -1,0 +1,35 @@
+{
+  "checkpoint": "/root/dataDisk/home/tysearch/ngram-embedding/runs/aligned_random_G_seed42/last.pt",
+  "tokens": 100000,
+  "loss": {
+    "normal": {
+      "hit": {
+        "mean": 3.134758273396437,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.8446882501998805,
+        "count": 48916
+      }
+    },
+    "zero": {
+      "hit": {
+        "mean": 3.135075926995391,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.8444011482976816,
+        "count": 48916
+      }
+    }
+  },
+  "activation_document_mean": {
+    "hit_delta_ratio_mean": 0.0020636860968782597,
+    "hit_effective_delta_ratio_mean": 0.0020344848760197425,
+    "hit_gate_mean": 0.22560640399488027,
+    "hit_gate_p50": 0.1658911006462654,
+    "hit_gate_p90": 0.5040588356904535,
+    "hit_rounded_zero_fraction": 0.5777418715441787
+  },
+  "note": "Activation summaries average per-document statistics. Hit at t predicts target t+1. Miss loss can change through earlier injected context."
+}

@@ -95,6 +95,14 @@ CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因
 
 按预注册决策，本项目不再为相同 causal continued-pretraining 目标追加 token 或扫描更多层位。下一阶段转向显式 alignment pretraining，以及 teacher table 的 whitening/contrastive projection；只有离线 held-out key 上正确表稳定优于 shuffled，才重新进入下游训练。
 
+### 4.6 显式 Alignment 改变 CMMLU 结果
+
+显式 alignment 已完成，详见 [ALIGNMENT_STUDY.md](ALIGNMENT_STUDY.md)。离线 held-out keys 上，mean-centered teacher table 经 cosine+InfoNCE 投影后，正确映射 Recall@10 达 99.56%–99.61%，shuffled 仅 0.49%–0.59%。Whitening/PCA 没有优于简单 mean-centering。
+
+将 1024 维对齐表接回学生并关闭 fallback/ShortConv 后，2M-token 的 low-LR G 在 CMMLU 上达到 `51.100±0.029`，相比 low-LR S 高 `+0.238`、相比 L 高 `+0.229`；两个差值在三个 seed 上均为正。Frozen G 相比 L 也稳定高 `+0.179`。使用同一对齐表但随机初始化投影的 G 为 50.951，低于 low-LR aligned G。
+
+因此此前失败的主要原因更可能是教师 latent 与学生 residual space 缺少稳定映射，而非教师表本身没有信息。显式 alignment 将 CMMLU 的 G−S 从未对齐版本的负值转为小但跨 seed 一致的正值。C-Eval 没有同步提升，当前结论限定为约 +0.23 个百分点的 CMMLU 信号，仍需 5M-token 确认。
+
 ## 6. 代码与结果索引
 
 - 核心模型：[graft/model.py](graft/model.py)

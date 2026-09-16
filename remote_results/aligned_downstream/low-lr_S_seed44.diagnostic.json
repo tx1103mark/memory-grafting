@@ -1,0 +1,35 @@
+{
+  "checkpoint": "/root/dataDisk/home/tysearch/ngram-embedding/runs/aligned_low-lr_S_seed44/last.pt",
+  "tokens": 100000,
+  "loss": {
+    "normal": {
+      "hit": {
+        "mean": 3.1353762804150405,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.844869334150466,
+        "count": 48916
+      }
+    },
+    "zero": {
+      "hit": {
+        "mean": 3.1354742982861543,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.8450944469101596,
+        "count": 48916
+      }
+    }
+  },
+  "activation_document_mean": {
+    "hit_delta_ratio_mean": 0.0023524742010955844,
+    "hit_effective_delta_ratio_mean": 0.002387217227244537,
+    "hit_gate_mean": 0.9250392149758819,
+    "hit_gate_p50": 0.9904782396034907,
+    "hit_gate_p90": 0.9999749672492878,
+    "hit_rounded_zero_fraction": 0.5440731786641498
+  },
+  "note": "Activation summaries average per-document statistics. Hit at t predicts target t+1. Miss loss can change through earlier injected context."
+}

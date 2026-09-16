@@ -1,0 +1,35 @@
+{
+  "checkpoint": "/root/dataDisk/home/tysearch/ngram-embedding/runs/aligned_frozen_G_seed44/last.pt",
+  "tokens": 100000,
+  "loss": {
+    "normal": {
+      "hit": {
+        "mean": 3.135216787477302,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.84485432304066,
+        "count": 48916
+      }
+    },
+    "zero": {
+      "hit": {
+        "mean": 3.1354015613347115,
+        "count": 51084
+      },
+      "miss": {
+        "mean": 2.845199765339439,
+        "count": 48916
+      }
+    }
+  },
+  "activation_document_mean": {
+    "hit_delta_ratio_mean": 0.017506056733979473,
+    "hit_effective_delta_ratio_mean": 0.017592893313341493,
+    "hit_gate_mean": 0.9999930562588992,
+    "hit_gate_p50": 1.0,
+    "hit_gate_p90": 1.0,
+    "hit_rounded_zero_fraction": 0.07848500130360558
+  },
+  "note": "Activation summaries average per-document statistics. Hit at t predicts target t+1. Miss loss can change through earlier injected context."
+}
