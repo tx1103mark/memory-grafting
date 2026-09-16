@@ -16,6 +16,7 @@ environment.freeze.txt
 H200_SERVER_GUIDE.md
 remote_results/**/*.jsonl
 remote_results/logs/
+remote_results/aligned_5m/*.log
 remote_results/*.tar
 remote_results/*.tar.gz
 *_bundle/

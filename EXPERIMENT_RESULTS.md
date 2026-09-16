@@ -103,6 +103,16 @@ CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因
 
 因此此前失败的主要原因更可能是教师 latent 与学生 residual space 缺少稳定映射，而非教师表本身没有信息。显式 alignment 将 CMMLU 的 G−S 从未对齐版本的负值转为小但跨 seed 一致的正值。C-Eval 没有同步提升，当前结论限定为约 +0.23 个百分点的 CMMLU 信号，仍需 5M-token 确认。
 
+### 4.7 5M-token 预注册确认
+
+固定 low-LR aligned T12→S1、500k 表、关闭 fallback/ShortConv，从 base 权重独立训练 G/S/L 各三个 seed 到 5M。CMMLU 主指标结果为 G `50.871±0.082`、S `50.946±0.118`、L `50.902±0.101`。配对 G−S 为 `−0.075`，95% t CI `[−0.306,+0.156]`；G−L 为 `−0.031`，95% t CI `[−0.309,+0.247]`。三个 seed 未保持同号，2M 的正信号没有复制。C-Eval 同样没有提升：G−S `−0.046`、G−L `−0.196`。
+
+诊断层面并非 memory 被关掉。G 的最终 alpha 稳定在约 0.004，有效注入约占 hidden norm 的 1.49%–1.54%；关闭 G memory 后三个 seed 的 hit-token loss 均上升约 `0.00018–0.00030`。S 的 alpha 和有效注入接近零。正确对应关系因而能被 causal objective 识别并用于降低局部 loss，但该作用没有稳定转化为中文多选知识准确率。
+
+67 个 CMMLU 学科中仅 3 个学科的 G−S 在三个 seed 上均为正，18 个学科三个 seed 均不为正；较大的学科级升降多数不能跨 seed 保持。因此 5M 结果也不支持某一知识领域获得稳定提升。
+
+综合 2M 与 5M，alignment 的效果应从“稳定提升 CMMLU”下调为“产生可检测但预算敏感的弱信号”。继续追加相同训练预算或直接扩表的判别价值有限；下一轮应定位 2M 附近的时间动态和受益 token/学科，随后测试显式任务相关 alignment 或 contrastive calibration。
+
 ## 6. 代码与结果索引
 
 - 核心模型：[graft/model.py](graft/model.py)
