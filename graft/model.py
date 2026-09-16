@@ -17,7 +17,7 @@ def rms(x):
 
 class MemoryAdapter(nn.Module):
     def __init__(self, memory_dim, hidden_dim, engram_buckets=0, engram_dim=128, shortconv_kernel=0,
-                 teacher_memory=True):
+                 teacher_memory=True, aligned_init='none'):
         super().__init__()
         self.key = nn.Linear(memory_dim, hidden_dim, bias=False)
         self.value = nn.Linear(memory_dim, hidden_dim, bias=False)
@@ -25,6 +25,13 @@ class MemoryAdapter(nn.Module):
         self.alpha = nn.Parameter(torch.tensor(0.001))
         self.engram_buckets = engram_buckets
         self.teacher_memory = teacher_memory
+        self.aligned_init = aligned_init
+        if aligned_init != 'none':
+            if memory_dim != hidden_dim:
+                raise ValueError('Aligned identity initialization requires memory_dim == hidden_dim')
+            nn.init.eye_(self.key.weight);nn.init.eye_(self.value.weight)
+            if aligned_init == 'frozen':
+                self.key.weight.requires_grad_(False);self.value.weight.requires_grad_(False)
         if engram_buckets:
             self.engram2 = nn.Embedding(engram_buckets, engram_dim)
             self.engram3 = nn.Embedding(engram_buckets, engram_dim)
@@ -97,7 +104,7 @@ class MemoryAdapter(nn.Module):
 
 class GraftedLM(nn.Module):
     def __init__(self, backbone, table=None, layer=2, checkpointing=False,engram_buckets=0,shortconv_kernel=0,
-                 teacher_memory=True):
+                 teacher_memory=True,aligned_init='none'):
         super().__init__()
         self.backbone = backbone
         self.layer = layer
@@ -108,7 +115,8 @@ class GraftedLM(nn.Module):
             raise ValueError('Injection layer index outside student blocks')
         self.memory = None if table is None else nn.Embedding.from_pretrained(table, freeze=True, padding_idx=0)
         self.adapter = None if table is None else MemoryAdapter(table.shape[1], self.config.hidden_size,
-            engram_buckets=engram_buckets,shortconv_kernel=shortconv_kernel,teacher_memory=teacher_memory)
+            engram_buckets=engram_buckets,shortconv_kernel=shortconv_kernel,teacher_memory=teacher_memory,
+            aligned_init=aligned_init)
         if self.adapter is not None:
             # Keep trainable adapter master weights and small gates in FP32.
             self.adapter.to(device=base.model.embed_tokens.weight.device)
@@ -146,7 +154,7 @@ class GraftedLM(nn.Module):
 
 
 def load_model(path, group='G', memory_path=None, device='cuda', checkpointing=True, layer=2,
-               engram_buckets=0,shortconv_kernel=0,teacher_memory=True):
+               engram_buckets=0,shortconv_kernel=0,teacher_memory=True,aligned_init='none'):
     dtype = torch.bfloat16 if str(device).startswith('cuda') else torch.float32
     base = AutoModelForCausalLM.from_pretrained(path, torch_dtype=dtype, attn_implementation='sdpa', local_files_only=True)
     base.config.use_cache = False
@@ -164,7 +172,7 @@ def load_model(path, group='G', memory_path=None, device='cuda', checkpointing=T
             table = torch.cat((table[:1], table[order]), dim=0)
     return GraftedLM(base, table, layer=layer, checkpointing=checkpointing,
                      engram_buckets=engram_buckets,shortconv_kernel=shortconv_kernel,
-                     teacher_memory=teacher_memory).to(device)
+                     teacher_memory=teacher_memory,aligned_init=aligned_init).to(device)
 
 
 def trainable_state(model):

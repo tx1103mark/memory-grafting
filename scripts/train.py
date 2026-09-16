@@ -69,6 +69,7 @@ def main():
     p.add_argument('--engram-buckets',type=int,default=0)
     p.add_argument('--shortconv-kernel',type=int,default=0)
     p.add_argument('--disable-teacher-memory',action='store_true')
+    p.add_argument('--aligned-init',choices=['none','frozen','low-lr'],default='none')
     p.add_argument('--stop-after-steps',type=int,help='Debug interruption; saves last.pt without marking the run complete')
     a = p.parse_args()
     if a.tokens <= 0 or a.micro_batch <= 0 or a.accumulation <= 0:
@@ -95,7 +96,7 @@ def main():
             raise ValueError('Memory table was built with different key ordering')
     model = load_model(a.root/'models/student', a.group, memory_dir/'table.pt', a.device, not a.no_checkpointing,
                        layer=a.student_block-1,engram_buckets=a.engram_buckets,shortconv_kernel=a.shortconv_kernel,
-                       teacher_memory=not a.disable_teacher_memory)
+                       teacher_memory=not a.disable_teacher_memory,aligned_init=a.aligned_init)
     if model.adapter is not None:
         with torch.no_grad():
             model.adapter.alpha.fill_(a.alpha_init)
@@ -104,11 +105,12 @@ def main():
         if not param.requires_grad:
             continue
         adapter = n.startswith('adapter.')
+        aligned_projection = a.aligned_init=='low-lr' and n.startswith(('adapter.key.','adapter.value.'))
         decay = param.ndim >= 2 and 'norm' not in n
-        groups.setdefault((adapter,decay), []).append(param)
-    optimizer = torch.optim.AdamW([dict(params=params, lr=1e-4 if adapter else 2e-5,
-                                        initial_lr=1e-4 if adapter else 2e-5, weight_decay=.01 if decay else 0.)
-                                  for (adapter,decay), params in groups.items()], betas=(.9,.95), eps=1e-8)
+        lr = 2e-6 if aligned_projection else (1e-4 if adapter else 2e-5)
+        groups.setdefault((lr,decay), []).append(param)
+    optimizer = torch.optim.AdamW([dict(params=params,lr=lr,initial_lr=lr,weight_decay=.01 if decay else 0.)
+                                  for (lr,decay), params in groups.items()], betas=(.9,.95), eps=1e-8)
     manifest = dict(group=a.group, seed=a.seed, tokens=a.tokens, micro_batch=a.micro_batch, accumulation=a.accumulation,
                     data_hash=file_hash(processed/'manifest.json'), assets_hash=file_hash(a.root/'assets.lock.json'),
                     keys_hash=file_hash(processed/'keys.json'),
@@ -117,6 +119,7 @@ def main():
                     forward='explicit stock Qwen3 blocks; full sequence; no KV cache', learning_rates={'lora':2e-5,'adapter':1e-4})
     manifest.update(data_dir=str(a.data_dir),engram_buckets=a.engram_buckets,shortconv_kernel=a.shortconv_kernel,
                     disable_teacher_memory=a.disable_teacher_memory)
+    manifest['aligned_init']=a.aligned_init
     if a.alpha_init != .001:
         manifest['alpha_init'] = a.alpha_init
     if a.student_block != 3 or a.memory_dir != Path('memory'):

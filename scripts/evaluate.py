@@ -43,7 +43,8 @@ def main():
                      layer=saved['manifest'].get('student_block',3)-1 if saved else 2,
                      engram_buckets=saved['manifest'].get('engram_buckets',0) if saved else 0,
                      shortconv_kernel=saved['manifest'].get('shortconv_kernel',0) if saved else 0,
-                     teacher_memory=not saved['manifest'].get('disable_teacher_memory',False) if saved else True)
+                     teacher_memory=not saved['manifest'].get('disable_teacher_memory',False) if saved else True,
+                     aligned_init=saved['manifest'].get('aligned_init','none') if saved else 'none')
     if saved:
         restore_trainable(model,saved['model'])
     tok=AutoTokenizer.from_pretrained(a.root/'models/student',local_files_only=True)

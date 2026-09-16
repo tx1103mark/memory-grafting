@@ -117,3 +117,10 @@ def test_teacher_memory_can_be_disabled_while_fallback_remains_active():
     y2=adapter(h,torch.randn_like(memory),hit,ids,valid)
     torch.testing.assert_close(y1,y2)
     assert not torch.equal(y1,h)
+
+
+def test_aligned_identity_initialization_and_freezing():
+    adapter=MemoryAdapter(8,8,aligned_init='frozen')
+    torch.testing.assert_close(adapter.key.weight,torch.eye(8))
+    torch.testing.assert_close(adapter.value.weight,torch.eye(8))
+    assert not adapter.key.weight.requires_grad and not adapter.value.weight.requires_grad
