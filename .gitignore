@@ -13,6 +13,7 @@ memory_*/
 runs/
 logs/
 environment.freeze.txt
+H200_SERVER_GUIDE.md
 remote_results/**/*.jsonl
 remote_results/logs/
 remote_results/*.tar
