@@ -23,6 +23,10 @@
 
 对齐表被投影到学生 1024 维空间。`frozen` 使用冻结 identity K/V；`low-lr` 从 identity 初始化并以 2e-6 学习率更新；`random` 使用同一对齐表但随机初始化 K/V。所有配置关闭 fallback 与 ShortConv。
 
+## 5M-token 预注册确认
+
+2M-token 结果确定后，固定 T12→S1、500k 表、关闭 fallback/ShortConv，并只保留表现最好的 low-LR aligned 配置。5M 实验从相同 Qwen3-0.6B-Base 权重独立训练，不从 2M checkpoint 续训；比较正确教师表 G、打乱教师表 S、LoRA-only L，使用 seeds 42/43/44。CMMLU 是唯一主指标，C-Eval 是次指标。主要检验为配对的 G−S，其次为 G−L；只有三个 seed 均同号且 95% t 区间不跨 0，才视为复制 2M 信号。
+
 CMMLU 是预注册主指标。表中为三个 seed 的学科 macro accuracy 均值±标准差。
 
 | 配置 | 0.5M | 2M |
