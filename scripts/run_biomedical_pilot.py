@@ -1,10 +1,12 @@
 """Biomedical domain pilot inspired by TinyEngram, with leakage-safe MMLU evaluation."""
 import concurrent.futures,fcntl,json,os,queue,subprocess,time
 from pathlib import Path
+from datasets import load_dataset
 from scripts.run_layer_study import call
 
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'runs/biomedical_pilot';LOG=ROOT/'logs/biomedical_pilot'
 TASKS='mmlu_clinical_knowledge,mmlu_professional_medicine,mmlu_medical_genetics,mmlu_anatomy,mmlu_high_school_world_history'
+SUBJECTS=tuple(x.removeprefix('mmlu_') for x in TASKS.split(','))
 
 def wait_free(gpu):
     while int(subprocess.check_output(['nvidia-smi',f'--id={gpu}','--query-gpu=memory.free',
@@ -28,6 +30,11 @@ def main():
     if not (memory/'manifest.json').exists():
         call('scripts.install_aligned_memory',['--source','runs/biomedical_alignment','--base-memory','memory_biomedical/T12',
              '--dest','memory_biomedical_aligned/T12'],2,LOG/'install.log')
+    # Evaluation subprocesses run offline for reproducibility; populate every
+    # requested official MMLU configuration before entering that environment.
+    for subject in SUBJECTS:
+        for split in ('dev','validation','test'):
+            load_dataset('cais/mmlu',subject,split=split)
     if not (OUT/'B0.json').exists():
         wait_free(2);call('scripts.evaluate',['--tasks',TASKS,'--output',OUT/'B0.json'],2,LOG/'B0.eval.log')
 
