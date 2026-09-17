@@ -15,6 +15,22 @@
 
 因此，现阶段最稳妥的判断是：**显式 alignment 能产生可检测但训练预算敏感的弱信号，尚不能证明 Memory Grafting 稳定提高现有 Qwen3-0.6B-Base 的中文能力。** 继续单纯增加相同 causal-training tokens 或扩大表规模的判别价值有限。
 
+### 如何理解这些结论
+
+**Held-out n-gram** 是没有参与 alignment 投影训练和超参数选择的 n-gram。我们把 60k 个 n-gram key 按 key 隔离为 train/validation/test：train 用于学习教师空间到学生空间的线性投影，validation 用于选择 mean-centering、PCA、whitening 及训练目标，最后只在 held-out test keys 上报告结果。它相当于离线对齐实验的测试集，用来检查投影能否泛化到未见过的短语，而不是记住训练表项。这里的 held-out 不是 CMMLU/C-Eval，也不是从最终 500k memory 中永久删除这些 key。
+
+**Recall@10** 衡量一个教师表向量经过投影后，能否在学生表示库中找回与它属于同一 n-gram 的正确表示。`99.56%–99.61%` 表示约 99.6% 的 held-out 查询，其正确学生表示位于相似度最高的 10 个候选中。打乱 key-row 对应后只有约 0.5%，说明正确教师表示与对应学生表示之间确实存在可泛化映射。但这只是“表示可对齐”的证据，不等于下游答题能力会提高。
+
+**Low-LR** 指 aligned memory 的 key/value 投影从 identity 初始化后仍允许训练，但使用较低的学习率 `2e-6`。作为比较，`frozen` 固定 identity 投影不更新，`random projection` 使用同一张正确教师表却随机初始化投影。Low-LR 允许模型轻微校准已经对齐的空间，同时尽量避免短预算 continued pretraining 破坏离线学到的映射。
+
+**G、S、R、L** 分别表示正确教师表、打乱教师对应关系的表、随机向量表和 LoRA-only。G−S 是最关键的语义检验：两组拥有完全相同的教师向量集合、参数量和查表命中率，区别只有 n-gram 是否取回正确的教师向量。G−L 则回答增加 memory 分支是否优于普通 LoRA continued pretraining。
+
+**pp** 是百分点。例如 51.100% 减去 50.862% 等于 `+0.238 pp`。**95% t CI** 是根据三个相同 seed 的配对差值计算的置信区间；区间跨 0 表示现有三次运行无法稳定判定 G 更好。三个 seed 样本仍很少，因此即使区间不跨 0，也只能视为需要更大预算独立确认的信号。
+
+**Hit-token loss** 只统计当前位置命中 n-gram memory 时，对下一个 token 的预测损失。对同一个训练完成的 checkpoint，分别正常开启 memory 和把 memory 输出置零，能够观察该支路对预测的直接贡献。关闭正确表后 loss 小幅上升，说明模型确实使用了 memory；但上升只有约 `0.00018–0.00030`，而 CMMLU/C-Eval 是离散的多选准确率，因此这种局部收益可能太小，或者与学科答题所需能力不一致。
+
+2M 与 5M 并不矛盾。2M 时正确表相对 S/L 出现约 `+0.23 pp`，但效果很小；5M 独立实验改变了完整学习率日程，并从同一个 Base checkpoint 重新训练，结果回到零附近。这说明 2M 结果更像某一训练阶段的短暂优势，而不是随着训练增加会持续扩大的能力增益。
+
 ## 方法
 
 对训练语料中的高频 2/3/4-gram，用教师模型离线编码最后一个 token 的 hidden state，构建确定性查找表。学生在指定 block 后检索最长匹配 n-gram，并通过投影、query-key gate 和残差连接注入：
@@ -65,6 +81,28 @@ G 与 S 的差异用于检验教师语义对应关系；G 与 R 区分教师表�
 | Alignment | mean-centering + cosine/InfoNCE 投影 | held-out correct Recall@10 约 99.6%，证明教师和学生空间可对齐 |
 | Aligned 2M | frozen/low-LR/random projection 对照 × 3 seeds | low-LR G−S +0.238 pp、G−L +0.229 pp，形成小幅 CMMLU 信号 |
 | Aligned 5M | low-LR G/S/L × 3 seeds，预注册确认 | G−S −0.075 pp、G−L −0.031 pp，未复制 2M 信号 |
+
+### 各阶段为什么这样推进
+
+1. **Pilot：先验证整条链路。** 初版使用 60k 个高频 2/3/4-gram，把 Qwen3-8B-Base 第 12 个 block 的表示注入学生。B0、L、R、G 的训练、评测和 memory on/off 都能运行，证明实现具备继续实验的基础；但单次分数不足以判断教师知识是否有效。
+
+2. **Gate：排除 memory 没有真正进入模型。** 我们改变 residual scale 的初值并记录 gate 和注入向量相对 hidden state 的范数。memory 分支实际处于工作状态，注入约占 hidden norm 的 1% 左右，但不同 gate 配置的评测区间都跨 0。因此早期失败不能简单归因于“gate 从零开始、训练太短而没有打开”。
+
+3. **Layer：搜索教师来源层和学生插入层。** 比较教师 T4/T8/T12 与学生 S1/S3/S6/S12，希望找到表征抽象程度更匹配的位置。T8→S12 出现最大的单点 G−R 差值，但 24 项配对区间全部跨 0。这轮只能产生候选层位，不能确认最佳组合。
+
+4. **Long：检查训练预算是否不足。** 对代表性层位训练到 10M tokens，并保留 2M/5M checkpoint。更长训练没有让正确表稳定超过随机表或 LoRA，说明仅延长相同训练目标不足以解决问题。
+
+5. **Semantic：用 shuffled teacher 做严格语义对照。** 随机表 R 同时改变向量内容和对应关系，无法单独回答教师语义是否有用；因此加入 S，在不改变教师向量集合的情况下打乱 n-gram 与向量的对应。T12→S1 和 T8→S12 各跑 G/S/R/L × 3 seeds。正确表没有稳定超过 S，T12→S1 的 CMMLU G−S 反而为 −0.671 pp，否定了初版结构的语义迁移解释。
+
+6. **Mechanism repair：补齐论文中的关键结构。** 将精确表从 60k 扩至 500k，未命中位置加入可训练 hash n-gram fallback，并增加因果 ShortConv。T12→S1 在单个 seed 的 C-Eval 上从 2M 到 5M 持续优于 S/L，但 CMMLU 没有同步提升。这说明更完整机制可能产生信号，也可能只是开发集和单 seed 波动。
+
+7. **Confirmation：复核单 seed 积极结果并做组件归因。** 固定机制后运行三个 seed，同时分别关闭 fallback、ShortConv 和教师表。C-Eval 的优势在 seed 44 反转，CMMLU G−S 为 −0.707 pp；关闭 fallback 或 ShortConv 反而略好。因此上一阶段的 C-Eval 提升不能作为稳定结论，研究重点转向教师与学生表示空间不匹配。
+
+8. **Alignment：先离线验证教师表示能否映射到学生空间。** 对正确表和 shuffled 表分别训练相同配方的投影，严格使用 train/validation/held-out test 划分。简单 mean-centering 加 cosine+InfoNCE 优于 PCA/whitening；正确表的 held-out cosine、CKA 和检索率远高于 shuffled。这证明教师 latent 里存在与学生 n-gram 表示对应的信息。
+
+9. **Aligned 2M：把离线对齐表接回学生。** 比较 frozen、low-LR、random projection、G/S/L。Low-LR G 在三个 seed 上都超过 S 和 L，CMMLU 分别提升 +0.238/+0.229 pp；同一张表配随机投影也更差。这是整个项目中控制最完整的正向信号，但幅度很小，且 C-Eval 没有提升。
+
+10. **Aligned 5M：按预注册标准做独立确认。** 固定 T12→S1、500k 表、关闭 fallback/ShortConv，只比较 low-LR G/S/L，三个 seed 全部从 Base 权重独立训练到 5M。CMMLU 和 C-Eval 均未复制 2M 优势。与此同时，on/off 诊断仍显示 G 被模型使用，所以最终问题不是支路失效，而是其局部语言建模收益没有形成稳定下游能力收益。
 
 ### 最终 5M 结果
 
