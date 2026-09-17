@@ -5,13 +5,13 @@
 本项目研究一种轻量的外部记忆注入方法：预先抽取大模型对高频短语的 hidden state，保存为冻结查找表，再通过可训练投影和 gate 注入小模型。仓库公开训练代码、消融设计、评测结果和失败结论，重点回答教师表示是否真的带来超出 LoRA 与额外参数的收益。
 
 > [!NOTE]
-> **TL;DR：** 学生模型能够识别并使用正确的教师 memory，显式 alignment 也能把教师表示可靠映射到学生空间；但 2M tokens 时约 `+0.23 pp` 的 CMMLU 信号没有在预注册 5M 实验中复现。当前证据支持“局部语言建模有效”，尚不支持“稳定提升中文知识能力”。
+> **TL;DR：** 学生模型能够识别并使用正确的教师 memory，显式 alignment 也能把教师表示可靠映射到学生空间；通用中文实验的 2M 信号没有在 5M 复现。领域匹配的 Biomedical 实验中，Clinical Knowledge 的 G−S 三个 seed 均为正、均值 `+0.755 pp`，但 G−L 只有 `+0.252 pp` 且置信区间跨 0。当前证据支持“小而可检测的领域语义信号”，尚不足以宣称稳定能力提升。
 
 如果这个项目对你的研究有帮助，欢迎通过 Issue 讨论新的对照实验或复现结果。
 
 ## 📢 Latest Updates
 
-- **2026-09-17** — 启动 Biomedical domain pilot：用 Biomed-Enriched 构建领域 memory，以 MMLU Clinical Knowledge 为无泄漏主评测。
+- **2026-09-17** — 完成 Biomedical 三 seed 确认：Clinical Knowledge G−S `+0.755 pp`、3/3 正向；G−L `+0.252 pp`、两正一平。
 - **2026-09-17** — 重构项目文档，汇总完整实验路径、术语解释和最终证据边界。
 - **2026-09-16** — 完成 aligned memory 的 5M-token 预注册确认：G−S `−0.075 pp`，未复制 2M 正向信号。
 - **2026-09-16** — 完成显式 alignment 与 2M 下游实验：low-LR G−S `+0.238 pp`，三个 seed 均为正。
@@ -23,6 +23,7 @@
 - [Key Finding 1：教师与学生表示可以对齐](#key-finding-1)
 - [Key Finding 2：2M 信号没有通过 5M 确认](#key-finding-2)
 - [Key Finding 3：模型使用了 memory，但收益停留在局部 loss](#key-finding-3)
+- [Key Finding 4：领域匹配产生小幅正向信号](#key-finding-4)
 - [实验路线](#experiment-roadmap)
 - [快速开始](#quick-start)
 - [复现实验](#reproduce)
@@ -119,6 +120,23 @@ CMMLU 的逐 seed G−S 为 `−0.163/+0.022/−0.085`，均值 `−0.075 pp`，
 
 优化器能够区分正确表与打乱表，并主动采用正确 memory。因此 5M 失败不能解释为 gate 没打开或 memory 支路完全失效。更可能的情况是：memory 帮助了频繁局部短语的 next-token prediction，但作用量太小，或与 CMMLU/C-Eval 所需的知识检索和推理能力不匹配。
 
+<a id="key-finding-4"></a>
+
+## 🧪 Key Finding 4：领域匹配产生小幅正向信号
+
+参考 TinyEngram，我们从 Biomed-Enriched 构建 60k 医学 2/3/4-gram memory，并将 MMLU Clinical Knowledge 预注册为唯一主指标。训练语料经过 MMLU dev/validation/test 去污染，评测题没有进入训练。
+
+| 配置 | Clinical Knowledge，三 seed 均值±SD | 相对对照 |
+|---|---:|---:|
+| Correct domain memory G | **59.623±0.998** | — |
+| Shuffled domain memory S | 58.868±0.998 | G−S **+0.755 pp** |
+| Domain LoRA-only L | 59.371±0.786 | G−L **+0.252 pp** |
+| Untrained Base B0 | 58.868 | G−B0 **+0.755 pp** |
+
+G−S 在 seeds 42/43/44 上分别为 `+0.377/+0.377/+1.509 pp`，三个 seed 均为正；G−L 为 `+0.377/0.000/+0.377 pp`。正确表的注入范数也明显高于 shuffled，说明模型利用了领域对应关系。不过 Clinical 只有 265 道题，增益对应 1–4 道题，三个 seed 的配对置信区间仍跨 0。领域数据本身贡献了主要提升，memory 是更小的附加信号。
+
+🔗 [Biomedical 实验设计与完整结果](docs/experiments/BIOMEDICAL_STUDY.md) · [原始结果](remote_results/biomedical/confirmation/summary.json)
+
 <a id="experiment-roadmap"></a>
 
 ## 🗺️ 实验路线
@@ -135,6 +153,7 @@ CMMLU 的逐 seed G−S 为 `−0.163/+0.022/−0.085`，均值 `−0.075 pp`，
 | Alignment | 教师空间能否映射到学生空间？ | Held-out Recall@10 约 99.6% | ✅ |
 | Aligned 2M | 对齐后是否产生下游收益？ | CMMLU G−S +0.238 pp | ✅ |
 | Aligned 5M | 2M 信号能否独立确认？ | G−S −0.075 pp，确认失败 | ✅ |
+| Biomedical | 领域训练与领域 memory 是否更有效？ | Clinical G−S +0.755 pp，3/3 正向；G−L +0.252 pp | ✅ |
 | Temporal analysis | 2M 优势何时形成和消失？ | 待运行密集 checkpoint 分析 | ⬜ |
 | Task-aware alignment | 对齐目标能否直接服务下游预测？ | 待实验 | ⬜ |
 

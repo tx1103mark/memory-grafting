@@ -1,0 +1,63 @@
+{
+  "groups": {
+    "B0": {
+      "mmlu_clinical_knowledge": 58.867924528301884,
+      "mmlu_professional_medicine": 51.470588235294116,
+      "mmlu_medical_genetics": 56.99999999999999,
+      "mmlu_anatomy": 47.40740740740741,
+      "mmlu_high_school_world_history": 62.0253164556962
+    },
+    "L": {
+      "mmlu_clinical_knowledge": 60.0,
+      "mmlu_professional_medicine": 49.26470588235294,
+      "mmlu_medical_genetics": 53.0,
+      "mmlu_anatomy": 47.40740740740741,
+      "mmlu_high_school_world_history": 62.0253164556962
+    },
+    "G": {
+      "mmlu_clinical_knowledge": 60.37735849056604,
+      "mmlu_professional_medicine": 50.0,
+      "mmlu_medical_genetics": 54.0,
+      "mmlu_anatomy": 45.925925925925924,
+      "mmlu_high_school_world_history": 60.75949367088608
+    },
+    "S": {
+      "mmlu_clinical_knowledge": 60.0,
+      "mmlu_professional_medicine": 50.36764705882353,
+      "mmlu_medical_genetics": 54.0,
+      "mmlu_anatomy": 45.18518518518518,
+      "mmlu_high_school_world_history": 60.75949367088608
+    }
+  },
+  "deltas": {
+    "G-S": {
+      "mmlu_clinical_knowledge": 0.37735849056603854,
+      "mmlu_professional_medicine": -0.367647058823529,
+      "mmlu_medical_genetics": 0.0,
+      "mmlu_anatomy": 0.7407407407407405,
+      "mmlu_high_school_world_history": 0.0
+    },
+    "G-L": {
+      "mmlu_clinical_knowledge": 0.37735849056603854,
+      "mmlu_professional_medicine": 0.735294117647058,
+      "mmlu_medical_genetics": 1.0,
+      "mmlu_anatomy": -1.481481481481488,
+      "mmlu_high_school_world_history": -1.2658227848101191
+    },
+    "G-B0": {
+      "mmlu_clinical_knowledge": 1.5094339622641542,
+      "mmlu_professional_medicine": -1.470588235294116,
+      "mmlu_medical_genetics": -2.999999999999993,
+      "mmlu_anatomy": -1.481481481481488,
+      "mmlu_high_school_world_history": -1.2658227848101191
+    },
+    "L-B0": {
+      "mmlu_clinical_knowledge": 1.1320754716981156,
+      "mmlu_professional_medicine": -2.205882352941174,
+      "mmlu_medical_genetics": -3.999999999999993,
+      "mmlu_anatomy": 0.0,
+      "mmlu_high_school_world_history": 0.0
+    }
+  },
+  "primary": "mmlu_clinical_knowledge"
+}

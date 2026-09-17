@@ -105,13 +105,33 @@ CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因
 
 综合 2M 与 5M，alignment 的效果应从“稳定提升 CMMLU”下调为“产生可检测但预算敏感的弱信号”。继续追加相同训练预算或直接扩表的判别价值有限；下一轮应定位 2M 附近的时间动态和受益 token/学科，随后测试显式任务相关 alignment 或 contrastive calibration。
 
+### 4.8 Biomedical 领域迁移
+
+参考 TinyEngram 的领域设置，我们改用 Biomed-Enriched 构建训练集和 60k 领域 n-gram 表，以 MMLU Clinical Knowledge 为预注册主指标。训练集共 5,000,137 tokens；MMLU 的 dev/validation/test 仅用于去污染和最终评测，不参与优化。领域 T12→S1 alignment 在 held-out keys 上达到 cosine 0.8585、Recall@1 95.02%、Recall@10 99.85%、CKA 0.9212。
+
+2M tokens、seeds 42/43/44 的主结果如下：
+
+| 配置 | Clinical Knowledge | G 的配对差值 |
+|---|---:|---:|
+| G | **59.623±0.998** | — |
+| S | 58.868±0.998 | G−S **+0.755±0.654** |
+| L | 59.371±0.786 | G−L **+0.252±0.218** |
+| B0 | 58.868 | G−B0 +0.755 |
+
+逐 seed G−S 为 `+0.377/+0.377/+1.509 pp`，3/3 正向；G−L 为 `+0.377/0.000/+0.377 pp`，两正一平。正确表的有效注入约占 hidden norm 的 0.75%–1.29%，shuffled 为 0.01%–0.42%；关闭正确表后 hit-token loss 在三个 seed 上均上升。
+
+领域匹配把通用实验中不稳定的 G−S 转成了方向一致的小信号，但 Clinical 仅有 265 道题，差值实际对应每个 seed 的 1–4 道题，三 seed 配对 t 区间仍跨 0。相对 B0 的平均 +0.755 pp 中，LoRA-only 已贡献约 +0.503 pp，因此主要收益来自领域语料，memory 在其上只增加约 +0.252 pp。该结果值得扩大独立医学评测题量确认，但不能表述为已证明的稳定领域能力提升。
+
+完整协议和结果见 [BIOMEDICAL_STUDY.md](experiments/BIOMEDICAL_STUDY.md)，原始 JSON 见 [remote_results/biomedical](../remote_results/biomedical)。
+
 ## 5. 当前结论
 
 1. 冻结教师 n-gram memory 可以接入 Qwen3-0.6B-Base；构表、continued pretraining、memory on/off 和 `lm-evaluation-harness` 评测链路均已验证。
 2. 初版 60k 表、层位扫描与 10M 延长训练没有显示稳定的 G−S/G−R/G−L 优势，单 seed 或单任务改善不能归因于教师语义。
 3. 教师表示并非不可利用。显式 alignment 在 held-out keys 上明显区分正确与打乱对应，并让正确表在 5M 训练中获得更大的 alpha、注入范数和一致的 hit-token loss 收益。
 4. Aligned memory 在 2M CMMLU 上出现约 +0.23 pp 的三 seed 信号，但预注册 5M 确认没有复制，C-Eval 也没有同步改善。
-5. 当前证据支持“模型会使用正确 memory 并获得极小的局部语言建模收益”，不支持“当前接口稳定提升中文知识能力”。下一步应研究时间动态和任务相关 alignment，而不是直接增加相同训练预算。
+5. Biomedical 领域匹配实验在 Clinical Knowledge 上得到三 seed 一致的 G−S 正值，但 G−L 只有约 +0.25 pp 且置信区间跨 0；这是初步领域语义信号，不是稳定能力提升的定论。
+6. 当前证据支持“模型会使用正确 memory，并在领域匹配时产生小幅下游信号”。下一步应扩大独立医学评测题量和任务相关 alignment，而不是只在同一小型选择题集合上扫描超参数。
 
 ## 6. 代码与结果索引
 

@@ -1,0 +1,257 @@
+{
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "values": {
+    "42": {
+      "L": {
+        "mmlu_clinical_knowledge": 60.0,
+        "mmlu_professional_medicine": 49.26470588235294,
+        "mmlu_medical_genetics": 53.0,
+        "mmlu_anatomy": 47.40740740740741,
+        "mmlu_high_school_world_history": 62.0253164556962
+      },
+      "G": {
+        "mmlu_clinical_knowledge": 60.37735849056604,
+        "mmlu_professional_medicine": 50.0,
+        "mmlu_medical_genetics": 54.0,
+        "mmlu_anatomy": 45.925925925925924,
+        "mmlu_high_school_world_history": 60.75949367088608
+      },
+      "S": {
+        "mmlu_clinical_knowledge": 60.0,
+        "mmlu_professional_medicine": 50.36764705882353,
+        "mmlu_medical_genetics": 54.0,
+        "mmlu_anatomy": 45.18518518518518,
+        "mmlu_high_school_world_history": 60.75949367088608
+      }
+    },
+    "43": {
+      "L": {
+        "mmlu_clinical_knowledge": 58.490566037735846,
+        "mmlu_professional_medicine": 48.529411764705884,
+        "mmlu_medical_genetics": 56.00000000000001,
+        "mmlu_anatomy": 42.96296296296296,
+        "mmlu_high_school_world_history": 61.18143459915611
+      },
+      "G": {
+        "mmlu_clinical_knowledge": 58.490566037735846,
+        "mmlu_professional_medicine": 48.529411764705884,
+        "mmlu_medical_genetics": 56.99999999999999,
+        "mmlu_anatomy": 42.96296296296296,
+        "mmlu_high_school_world_history": 63.29113924050633
+      },
+      "S": {
+        "mmlu_clinical_knowledge": 58.11320754716981,
+        "mmlu_professional_medicine": 48.161764705882355,
+        "mmlu_medical_genetics": 56.00000000000001,
+        "mmlu_anatomy": 42.96296296296296,
+        "mmlu_high_school_world_history": 62.0253164556962
+      }
+    },
+    "44": {
+      "L": {
+        "mmlu_clinical_knowledge": 59.62264150943396,
+        "mmlu_professional_medicine": 49.26470588235294,
+        "mmlu_medical_genetics": 52.0,
+        "mmlu_anatomy": 48.148148148148145,
+        "mmlu_high_school_world_history": 61.18143459915611
+      },
+      "G": {
+        "mmlu_clinical_knowledge": 60.0,
+        "mmlu_professional_medicine": 49.26470588235294,
+        "mmlu_medical_genetics": 54.0,
+        "mmlu_anatomy": 51.11111111111111,
+        "mmlu_high_school_world_history": 62.0253164556962
+      },
+      "S": {
+        "mmlu_clinical_knowledge": 58.490566037735846,
+        "mmlu_professional_medicine": 48.529411764705884,
+        "mmlu_medical_genetics": 52.0,
+        "mmlu_anatomy": 47.40740740740741,
+        "mmlu_high_school_world_history": 61.18143459915611
+      }
+    }
+  },
+  "aggregate": {
+    "L": {
+      "mmlu_clinical_knowledge": {
+        "mean": 59.37106918238993,
+        "std": 0.7855343394211838
+      },
+      "mmlu_professional_medicine": {
+        "mean": 49.01960784313726,
+        "std": 0.42452225675707733
+      },
+      "mmlu_medical_genetics": {
+        "mean": 53.666666666666664,
+        "std": 2.0816659994661366
+      },
+      "mmlu_anatomy": {
+        "mean": 46.17283950617284,
+        "std": 2.8043991831112467
+      },
+      "mmlu_high_school_world_history": {
+        "mean": 61.46272855133614,
+        "std": 0.4872154170376601
+      }
+    },
+    "G": {
+      "mmlu_clinical_knowledge": {
+        "mean": 59.62264150943397,
+        "std": 0.9983967211564514
+      },
+      "mmlu_professional_medicine": {
+        "mean": 49.26470588235295,
+        "std": 0.735294117647058
+      },
+      "mmlu_medical_genetics": {
+        "mean": 55.0,
+        "std": 1.7320508075688732
+      },
+      "mmlu_anatomy": {
+        "mean": 46.666666666666664,
+        "std": 4.124269898392607
+      },
+      "mmlu_high_school_world_history": {
+        "mean": 62.025316455696206,
+        "std": 1.2658227848101262
+      }
+    },
+    "S": {
+      "mmlu_clinical_knowledge": {
+        "mean": 58.86792452830188,
+        "std": 0.9983967211564514
+      },
+      "mmlu_professional_medicine": {
+        "mean": 49.01960784313726,
+        "std": 1.1818199462001158
+      },
+      "mmlu_medical_genetics": {
+        "mean": 54.0,
+        "std": 2.0000000000000036
+      },
+      "mmlu_anatomy": {
+        "mean": 45.18518518518519,
+        "std": 2.222222222222225
+      },
+      "mmlu_high_school_world_history": {
+        "mean": 61.32208157524613,
+        "std": 0.6445254141991306
+      }
+    }
+  },
+  "paired": {
+    "G-S": {
+      "mmlu_clinical_knowledge": {
+        "per_seed": {
+          "42": 0.37735849056603854,
+          "43": 0.37735849056603854,
+          "44": 1.5094339622641542
+        },
+        "mean": 0.7547169811320771,
+        "std": 0.6536040783278797,
+        "positive_seeds": 3
+      },
+      "mmlu_professional_medicine": {
+        "per_seed": {
+          "42": -0.367647058823529,
+          "43": 0.367647058823529,
+          "44": 0.735294117647058
+        },
+        "mean": 0.245098039215686,
+        "std": 0.561590158695568,
+        "positive_seeds": 2
+      },
+      "mmlu_medical_genetics": {
+        "per_seed": {
+          "42": 0.0,
+          "43": 0.9999999999999858,
+          "44": 2.0
+        },
+        "mean": 0.9999999999999952,
+        "std": 1.0,
+        "positive_seeds": 2
+      },
+      "mmlu_anatomy": {
+        "per_seed": {
+          "42": 0.7407407407407405,
+          "43": 0.0,
+          "44": 3.7037037037036953
+        },
+        "mean": 1.4814814814814785,
+        "std": 1.9598157859737662,
+        "positive_seeds": 2
+      },
+      "mmlu_high_school_world_history": {
+        "per_seed": {
+          "42": 0.0,
+          "43": 1.2658227848101333,
+          "44": 0.8438818565400865
+        },
+        "mean": 0.7032348804500733,
+        "std": 0.6445254141991368,
+        "positive_seeds": 2
+      }
+    },
+    "G-L": {
+      "mmlu_clinical_knowledge": {
+        "per_seed": {
+          "42": 0.37735849056603854,
+          "43": 0.0,
+          "44": 0.37735849056603854
+        },
+        "mean": 0.2515723270440257,
+        "std": 0.2178680261092932,
+        "positive_seeds": 2
+      },
+      "mmlu_professional_medicine": {
+        "per_seed": {
+          "42": 0.735294117647058,
+          "43": 0.0,
+          "44": 0.0
+        },
+        "mean": 0.245098039215686,
+        "std": 0.42452225675707733,
+        "positive_seeds": 1
+      },
+      "mmlu_medical_genetics": {
+        "per_seed": {
+          "42": 1.0,
+          "43": 0.9999999999999858,
+          "44": 2.0
+        },
+        "mean": 1.3333333333333286,
+        "std": 0.5773502691896298,
+        "positive_seeds": 3
+      },
+      "mmlu_anatomy": {
+        "per_seed": {
+          "42": -1.481481481481488,
+          "43": 0.0,
+          "44": 2.962962962962962
+        },
+        "mean": 0.49382716049382464,
+        "std": 2.2630003431880716,
+        "positive_seeds": 1
+      },
+      "mmlu_high_school_world_history": {
+        "per_seed": {
+          "42": -1.2658227848101191,
+          "43": 2.10970464135022,
+          "44": 0.8438818565400865
+        },
+        "mean": 0.5625879043600625,
+        "std": 1.7052539596318061,
+        "positive_seeds": 2
+      }
+    }
+  },
+  "conclusion": {
+    "primary": "mmlu_clinical_knowledge",
+    "g_beats_s_all_seeds": true,
+    "g_beats_l_all_seeds": false
+  }
+}
