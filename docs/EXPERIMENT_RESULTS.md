@@ -1,6 +1,6 @@
 # Qwen3 Base Memory Grafting 实验总结
 
-更新时间：2026-09-15。本文汇总仓库内已完成的训练、消融和评测。所有实验以 Qwen3-0.6B-Base 为学生、Qwen3-8B-Base 为教师，使用无标签中文文本进行 causal language-model continued pretraining，最终通过 `lm-evaluation-harness==0.4.13` 零样本评测 C-Eval validation 和 CMMLU。
+更新时间：2026-09-17。本文汇总仓库内已完成的训练、消融和评测。所有实验以 Qwen3-0.6B-Base 为学生、Qwen3-8B-Base 为教师，使用无标签中文文本进行 causal language-model continued pretraining，最终通过 `lm-evaluation-harness==0.4.13` 零样本评测 C-Eval validation 和 CMMLU。
 
 ## 1. 研究问题
 
@@ -79,17 +79,9 @@ T12→S1 在 C-Eval 5M 上比 L 高 1.36 点、比 S 高 1.03 点，并从 2M �
 
 CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因此这仍是开发集上的单 seed 积极信号，不能作为稳定中文知识提升的结论。
 
-## 5. 当前结论
-
-1. 离线 frozen teacher memory 可以低成本接入现有 Qwen3-0.6B-Base，训练和 `lm-evaluation-harness` 评测链路可运行。
-2. 简化的 60k 单层接口会使用 memory，但 G/S/R 无稳定差异，无法证明教师语义迁移。
-3. 教师向量和学生表征在线性 probe 中存在可利用对应关系；T8→S12 的表征对齐最明显。
-4. 扩表、fallback 和 ShortConv 后，T12→S1 在 C-Eval 出现随训练预算增长的 G−S 优势，说明机制修复方向值得继续。
-5. 该优势未跨到 CMMLU，且机制修复版只有一个 seed。当前证据支持“存在任务相关信号”，尚不支持“稳定提升中文能力”。
-
 ### 4.5 三种子确认与组件归因
 
-预注册确认实验已经完成，详细结果见 [CONFIRMATION_RESULTS.md](CONFIRMATION_RESULTS.md)。CMMLU 主指标上，full G/S/L 分别为 `50.122±0.682 / 50.829±0.020 / 50.902±0.101`，G−S 三个 seed 全为负，均值 −0.707 点。C-Eval 上 G−S 均值仅 +0.238 点，并在 seed 44 反转为 −1.176 点，上一轮单 seed 信号未稳定复现。
+预注册确认实验已经完成，详细结果见 [CONFIRMATION_RESULTS.md](experiments/CONFIRMATION_RESULTS.md)。CMMLU 主指标上，full G/S/L 分别为 `50.122±0.682 / 50.829±0.020 / 50.902±0.101`，G−S 三个 seed 全为负，均值 −0.707 点。C-Eval 上 G−S 均值仅 +0.238 点，并在 seed 44 反转为 −1.176 点，上一轮单 seed 信号未稳定复现。
 
 组件消融显示，CMMLU 上完整机制比关闭 fallback 低 0.138 点，比关闭 ShortConv 低 0.177 点，三个 seed 方向一致；关闭教师表、仅保留 fallback 得到 50.866，接近 S/L 且方差更低。因此当前教师表不仅没有提供稳定知识收益，还引入了明显的训练方差。
 
@@ -97,7 +89,7 @@ CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因
 
 ### 4.6 显式 Alignment 改变 CMMLU 结果
 
-显式 alignment 已完成，详见 [ALIGNMENT_STUDY.md](ALIGNMENT_STUDY.md)。离线 held-out keys 上，mean-centered teacher table 经 cosine+InfoNCE 投影后，正确映射 Recall@10 达 99.56%–99.61%，shuffled 仅 0.49%–0.59%。Whitening/PCA 没有优于简单 mean-centering。
+显式 alignment 已完成，详见 [ALIGNMENT_STUDY.md](experiments/ALIGNMENT_STUDY.md)。离线 held-out keys 上，mean-centered teacher table 经 cosine+InfoNCE 投影后，正确映射 Recall@10 达 99.56%–99.61%，shuffled 仅 0.49%–0.59%。Whitening/PCA 没有优于简单 mean-centering。
 
 将 1024 维对齐表接回学生并关闭 fallback/ShortConv 后，2M-token 的 low-LR G 在 CMMLU 上达到 `51.100±0.029`，相比 low-LR S 高 `+0.238`、相比 L 高 `+0.229`；两个差值在三个 seed 上均为正。Frozen G 相比 L 也稳定高 `+0.179`。使用同一对齐表但随机初始化投影的 G 为 50.951，低于 low-LR aligned G。
 
@@ -113,19 +105,27 @@ CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因
 
 综合 2M 与 5M，alignment 的效果应从“稳定提升 CMMLU”下调为“产生可检测但预算敏感的弱信号”。继续追加相同训练预算或直接扩表的判别价值有限；下一轮应定位 2M 附近的时间动态和受益 token/学科，随后测试显式任务相关 alignment 或 contrastive calibration。
 
+## 5. 当前结论
+
+1. 冻结教师 n-gram memory 可以接入 Qwen3-0.6B-Base；构表、continued pretraining、memory on/off 和 `lm-evaluation-harness` 评测链路均已验证。
+2. 初版 60k 表、层位扫描与 10M 延长训练没有显示稳定的 G−S/G−R/G−L 优势，单 seed 或单任务改善不能归因于教师语义。
+3. 教师表示并非不可利用。显式 alignment 在 held-out keys 上明显区分正确与打乱对应，并让正确表在 5M 训练中获得更大的 alpha、注入范数和一致的 hit-token loss 收益。
+4. Aligned memory 在 2M CMMLU 上出现约 +0.23 pp 的三 seed 信号，但预注册 5M 确认没有复制，C-Eval 也没有同步改善。
+5. 当前证据支持“模型会使用正确 memory 并获得极小的局部语言建模收益”，不支持“当前接口稳定提升中文知识能力”。下一步应研究时间动态和任务相关 alignment，而不是直接增加相同训练预算。
+
 ## 6. 代码与结果索引
 
-- 核心模型：[graft/model.py](graft/model.py)
-- n-gram 查表与数据拼接：[graft/data.py](graft/data.py)
-- Harness 适配：[graft/harness.py](graft/harness.py)
-- 数据处理：[scripts/prepare_data.py](scripts/prepare_data.py)
-- 500k 扩表：[scripts/expand_keys.py](scripts/expand_keys.py)
-- 教师表构建：[scripts/build_memory.py](scripts/build_memory.py)
-- 训练与评测：[scripts/train.py](scripts/train.py)、[scripts/evaluate.py](scripts/evaluate.py)
-- 对齐探针：[scripts/probe_alignment.py](scripts/probe_alignment.py)
-- 机制实验调度：[scripts/run_mechanism_study.py](scripts/run_mechanism_study.py)
-- 原始汇总：[remote_results](remote_results)
-- 分阶段报告：[PILOT_RESULTS.md](PILOT_RESULTS.md)、[LAYER_RESULTS.md](LAYER_RESULTS.md)、[LONG_RESULTS.md](LONG_RESULTS.md)、[SEMANTIC_RESULTS.md](SEMANTIC_RESULTS.md)
-- 三种子机制确认：[CONFIRMATION_RESULTS.md](CONFIRMATION_RESULTS.md)
+- 核心模型：[graft/model.py](../graft/model.py)
+- n-gram 查表与数据拼接：[graft/data.py](../graft/data.py)
+- Harness 适配：[graft/harness.py](../graft/harness.py)
+- 数据处理：[scripts/prepare_data.py](../scripts/prepare_data.py)
+- 500k 扩表：[scripts/expand_keys.py](../scripts/expand_keys.py)
+- 教师表构建：[scripts/build_memory.py](../scripts/build_memory.py)
+- 训练与评测：[scripts/train.py](../scripts/train.py)、[scripts/evaluate.py](../scripts/evaluate.py)
+- 对齐探针：[scripts/probe_alignment.py](../scripts/probe_alignment.py)
+- 机制实验调度：[scripts/run_mechanism_study.py](../scripts/run_mechanism_study.py)
+- 原始汇总：[remote_results](../remote_results)
+- 分阶段报告：[PILOT_RESULTS.md](experiments/PILOT_RESULTS.md)、[LAYER_RESULTS.md](experiments/LAYER_RESULTS.md)、[LONG_RESULTS.md](experiments/LONG_RESULTS.md)、[SEMANTIC_RESULTS.md](experiments/SEMANTIC_RESULTS.md)
+- 三种子机制确认：[CONFIRMATION_RESULTS.md](experiments/CONFIRMATION_RESULTS.md)
 
 模型权重、原始数据、冻结 memory table、checkpoint 和逐题 sample 文件因体积或数据授权原因不进入 Git；仓库保留生成脚本、manifest、汇总 JSON 和结论文档。

@@ -36,4 +36,4 @@ out+=['','## 解释边界','',
       '', '固定 alpha 不等于固定注入范数。位置变化也改变 hidden state 尺度，因此结果不能直接证明表征层级匹配；需要结合实际注入比例，以及后续尺度控制消融。',
       '', '本轮未使用 C-Eval test、CMMLU test。新 checkpoint 自动记录并恢复学生位置与记忆目录；默认旧 checkpoint 仍为 T12→S3。',
       '', '原始报告、逐题输出和配对结果在 runs/layer_study，训练曲线和 checkpoint 在 runs/layer_*。']
-Path('LAYER_RESULTS.md').write_text('\n'.join(out)+'\n',encoding='utf-8')
+Path('docs/experiments/LAYER_RESULTS.md').write_text('\n'.join(out)+'\n',encoding='utf-8')

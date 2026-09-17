@@ -1,18 +1,22 @@
 # 实验执行状态
 
-2026-09-15 17:16：语义确认实验全部完成，203/238 的错误列表均为空，共 21 个唯一 checkpoint 的 C-Eval 与 CMMLU 结果、18 份 memory 诊断。跨 seed 汇总显示 T12→S1 的 G−S 在 C-Eval 为 +0.014 pp、CMMLU 为 −0.671 pp；T8→S12 两任务均无法区分 G/S/R/L。当前简化接口没有稳定教师语义迁移证据，详见 `SEMANTIC_RESULTS.md`。
+> 本文件保留历史运行时间线。当前结论见根目录 [README](../README.md) 和 [综合实验总结](EXPERIMENT_RESULTS.md)。
+
+2026-09-16 15:28：显式 alignment 的 5M-token 预注册确认全部完成，9 个 G/S/L × 3 seeds 任务无失败。CMMLU G−S 为 −0.075 pp、G−L 为 −0.031 pp，95% t 区间均跨 0，未复制 2M 的正信号；memory on/off 仍确认正确表能带来极小的 hit-token loss 收益。结果见 [`ALIGNMENT_STUDY.md`](experiments/ALIGNMENT_STUDY.md)。
+
+2026-09-15 17:16：语义确认实验全部完成，203/238 的错误列表均为空，共 21 个唯一 checkpoint 的 C-Eval 与 CMMLU 结果、18 份 memory 诊断。跨 seed 汇总显示 T12→S1 的 G−S 在 C-Eval 为 +0.014 pp、CMMLU 为 −0.671 pp；T8→S12 两任务均无法区分 G/S/R/L。当前简化接口没有稳定教师语义迁移证据，详见 [`SEMANTIC_RESULTS.md`](experiments/SEMANTIC_RESULTS.md)。
 
 2026-09-15 后续：语义对齐确认实验已启动。固定 T12→S1 与 T8→S12，G/S(shuffled teacher)/R/L，seeds 42/43/44，10M tokens；两台 H200 共新增 16 组训练，并为全部最终 checkpoint 运行 C-Eval validation、CMMLU 和 memory 诊断。本地完整测试 9 passed，服务器核心测试各 7 passed。完成标记为 `runs/semantic_study/complete-203` 与 `complete-238`。
 
-2026-09-15 09:18：双机 15 组 10M-token 训练、2M/5M/10M C-Eval validation、10M memory-off 与诊断全部完成。修复 `compare_results.py` 的精确 task 样本选择后，两边汇总完成；旧 glob 会把 `.off` 样本误并入 on 结果并触发重复 ID，但不影响原始评测。总体未证明教师表优于随机表；详见 `LONG_RESULTS.md`。
+2026-09-15 09:18：双机 15 组 10M-token 训练、2M/5M/10M C-Eval validation、10M memory-off 与诊断全部完成。修复 `compare_results.py` 的精确 task 样本选择后，两边汇总完成；旧 glob 会把 `.off` 样本误并入 on 结果并触发重复 ID，但不影响原始评测。总体未证明教师表优于随机表；详见 [`LONG_RESULTS.md`](experiments/LONG_RESULTS.md)。
 
 2026-09-14 21:46：10M-token 双机实验已实际启动。h200-203 使用 GPU 0–3 运行 L、T6S1/T4S6/T8S12 的 G/R 队列，首批四组已记录约 0.7M tokens；原 h200 运行 T4S1/T8S1/T12S1/T6S6 的 G/R，八组均已记录训练指标，其中四组已生成 2M 阈值快照（实际 optimizer 边界为 2,000,689 tokens，manifest 总日程为 10M）。T12 初次因目录写错立即失败，已修正为 `memory/` 并在 GPU 4/5 成功补启动；recovery watcher PID 979424 会在现有训练结束后用修正版 runner 补评测和汇总。两机训练均为后台任务，完成标记分别为 `runs/long_study/complete` 与 `runs/long_source_study/complete`。
 
-2026-09-14 后续：已核对 Memory Grafting 附录 B.5 的教师第 6 层 → 学生第一层，新增 `LONG_STUDY.md` 和 `scripts/run_long_study.py`，准备 7 组 10M-token 实验（L，T6S1/T4S6/T8S12 的 G/R）。训练器新增 2M/5M 边界快照，本地真实小模型训练及精确恢复测试 2 passed（94.17s）。H200 的 SSH 多次在 banner exchange 阶段超时，尚未确认新训练启动；不要把代码已上传当作训练已运行。完成状态以 `runs/long_study/complete` 为准。
+2026-09-14 后续：已核对 Memory Grafting 附录 B.5 的教师第 6 层 → 学生第一层，新增 [`LONG_STUDY.md`](experiments/LONG_STUDY.md) 和 `scripts/run_long_study.py`，准备 7 组 10M-token 实验（L，T6S1/T4S6/T8S12 的 G/R）。训练器新增 2M/5M 边界快照，本地真实小模型训练及精确恢复测试 2 passed（94.17s）。H200 的 SSH 多次在 banner exchange 阶段超时，尚未确认新训练启动；不要把代码已上传当作训练已运行。完成状态以 `runs/long_study/complete` 为准。
 
-2026-09-14 21:10：教师层 T4/T8/T12 × 学生位置 S1/S3/S6/S12 的 G/R 交叉消融全部完成；22 组新增训练，2 组复用。每组 2M tokens、747 步。最高 G accuracy 为 T4→S6 的 51.3373%；G−R 宏平均差最大为 T8→S12 的 +0.7291 pp。24 项 G−R/G−L 的配对 95% 区间全部跨 0。完整结果见 `LAYER_RESULTS.md`，设计见 `LAYER_STUDY.md`；原始结果已同步到本地 `remote_results/runs/layer_study`，压缩包与服务器 SHA256 一致。
+2026-09-14 21:10：教师层 T4/T8/T12 × 学生位置 S1/S3/S6/S12 的 G/R 交叉消融全部完成；22 组新增训练，2 组复用。每组 2M tokens、747 步。最高 G accuracy 为 T4→S6 的 51.3373%；G−R 宏平均差最大为 T8→S12 的 +0.7291 pp。24 项 G−R/G−L 的配对 95% 区间全部跨 0。完整结果见 [`LAYER_RESULTS.md`](experiments/LAYER_RESULTS.md)，设计见 [`LAYER_STUDY.md`](experiments/LAYER_STUDY.md)；原始结果已同步到本地 `remote_results/runs/layer_study`，压缩包与服务器 SHA256 一致。
 
-后续更新：Gate 对照的七组 2M-token 训练与 C-Eval 已完成；每组 747 次更新，alpha 初值为 0.001/0.01/0.05。六项 G−L/G−R 配对区间均跨 0。实测旧 G gate 均值约 0.804，实际注入约 1.37%，修正了此前 gate 未打开的猜测。详细结果见 `GATE_STUDY.md`。
+后续更新：Gate 对照的七组 2M-token 训练与 C-Eval 已完成；每组 747 次更新，alpha 初值为 0.001/0.01/0.05。六项 G−L/G−R 配对区间均跨 0。实测旧 G gate 均值约 0.804，实际注入约 1.37%，修正了此前 gate 未打开的猜测。详细结果见 [`GATE_STUDY.md`](experiments/GATE_STUDY.md)。
 
 更新时间：2026-09-14 19:47，Asia/Shanghai。此文件是时间点快照，实时状态以服务器日志和完成标记为准。
 
@@ -43,7 +47,7 @@
 - G−L 学科宏平均差为 **-0.2528 pp**，95% 配对 bootstrap CI `[-1.0361, 0.5303] pp`。
 - G−R 学科宏平均差为 **+0.1877 pp**，95% 配对 bootstrap CI `[-0.6413, 1.0039] pp`。
 - 当前单 seed、2M-token pilot 没有证明 Memory Grafting 有效。教师表优于随机表的方向很弱且不显著，G 仍低于 L 和 B0。
-- 完整解释见 `PILOT_RESULTS.md`。
+- 完整解释见 [`PILOT_RESULTS.md`](experiments/PILOT_RESULTS.md)。
 
 没有停止或修改服务器上其他使用者的进程；训练按用户授权共享 H200 GPU。
 
@@ -60,7 +64,7 @@ cat runs/pilot.complete
 
 ## 下载实现
 
-下载流程吸收了 `H200_SERVER_GUIDE.md` 的经验：Xet 使用保守并发和较长超时；连续解码/重建失败时改用固定 `.aria2` 状态文件的 HTTP Range 续传；不使用文件逻辑大小判断完成，只有固定 revision 的 SHA256 校验通过后才写 `assets.complete`。教师大分片可用镜像作为传输通道，但最终完整性仍由 Hugging Face 固定 revision 的 LFS 哈希约束。
+下载流程吸收了 [`H200_SERVER_GUIDE.md`](../H200_SERVER_GUIDE.md) 的经验：Xet 使用保守并发和较长超时；连续解码/重建失败时改用固定 `.aria2` 状态文件的 HTTP Range 续传；不使用文件逻辑大小判断完成，只有固定 revision 的 SHA256 校验通过后才写 `assets.complete`。教师大分片可用镜像作为传输通道，但最终完整性仍由 Hugging Face 固定 revision 的 LFS 哈希约束。
 
 ## 下一阶段
 

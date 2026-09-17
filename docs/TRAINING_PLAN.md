@@ -1,6 +1,6 @@
 # 中文 Memory Grafting 继续训练实验方案
 
-版本：v0.3-base-harness，2026-09-14。代码实现与数据下载已启动，实际完成状态见 RUN_STATUS.md。以下研究设计仍区分计划与已验收产物，可运行入口见 README.md。
+版本：v0.3-base-harness，2026-09-14。代码实现与数据下载已启动，实际完成状态见 [RUN_STATUS.md](RUN_STATUS.md)。以下研究设计仍区分计划与已验收产物，可运行入口见 [README.md](../README.md)。
 
 **v0.3 评测变更（优先于下文 v0.2 的手写评分接口）**：按用户要求统一使用 `lm_eval==0.4.13`。继承 HFLM 的分词、候选评分与聚合逻辑，只替换模型前向以接入记忆。任务来自该版本的 `ceval-valid`（C-Eval val）和 `cmmlu`（CMMLU test）；保留官方学科说明、模板及 delimiter，设 `num_fewshot=0`、关闭 chat template。固定下载版本转成本地 JSON，只修改任务的数据读取路径与 `graft_` 名称前缀，并保存原始任务文件哈希。官方 acc/acc_norm 和按题量加权聚合全部保留，另列学科宏平均。
 
@@ -55,7 +55,7 @@
 
 必须核实模型 ID 包含 `-Base`，不能自动回退到不带该后缀的后训练版本。学生和教师的 tokenizer 均来自各自锁定的 Base 仓库，不假设同系列就可交换 tokenizer。现有业务 SFT 模型移植留到后续独立实验，本轮不再依赖用户 SFT checkpoint 路径。
 
-服务器说明见 [H200_SERVER_GUIDE.md](H200_SERVER_GUIDE.md)。该指南中的磁盘和 GPU 状态是历史快照，实际启动前重新检查；本方案不固定占用某张卡，也不自动连接服务器。
+服务器说明见 [H200_SERVER_GUIDE.md](../H200_SERVER_GUIDE.md)。该指南中的磁盘和 GPU 状态是历史快照，实际启动前重新检查；本方案不固定占用某张卡，也不自动连接服务器。
 
 ## 3. 数据准备
 
@@ -442,7 +442,7 @@ prediction = argmax_c score(c)
 
 ## 9. 下一步代码与配置接口
 
-以下保留 v0.2 建议接口作为设计参考；实际已实现路径及运行命令以 README.md 为准，评测入口为 scripts/evaluate.py（lm-evaluation-harness）。
+以下保留 v0.2 建议接口作为设计参考；实际已实现路径及运行命令以 [README.md](../README.md) 为准，评测入口为 scripts/evaluate.py（lm-evaluation-harness）。
 
 ```text
 configs/
