@@ -12,5 +12,6 @@
 | 6 | Mechanism repair | [MECHANISM_STUDY](MECHANISM_STUDY.md) | 综合报告第 4.4 节 |
 | 7 | Three-seed confirmation | [CONFIRMATION_STUDY](CONFIRMATION_STUDY.md) | [CONFIRMATION_RESULTS](CONFIRMATION_RESULTS.md) |
 | 8 | Explicit alignment + 5M confirmation | [ALIGNMENT_STUDY](ALIGNMENT_STUDY.md) | 同文档 |
+| 9 | Biomedical domain pilot | [BIOMEDICAL_STUDY](BIOMEDICAL_STUDY.md) | 运行中 |
 
 各阶段生成的 harness JSON、paired bootstrap 和诊断结果位于 [`remote_results/`](../../remote_results/)。

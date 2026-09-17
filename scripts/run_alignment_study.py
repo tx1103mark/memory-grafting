@@ -52,10 +52,13 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--root',type=Path,default=Path('.'))
     p.add_argument('--samples',type=int,default=60000);p.add_argument('--pca-rank',type=int,default=256)
     p.add_argument('--screen-steps',type=int,default=400);p.add_argument('--confirm-steps',type=int,default=800)
-    p.add_argument('--output-dir',type=Path,default=Path('runs/alignment_study'));a=p.parse_args()
+    p.add_argument('--output-dir',type=Path,default=Path('runs/alignment_study'))
+    p.add_argument('--data-dir',type=Path,default=Path('data/processed_500k'))
+    p.add_argument('--memory-dir',type=Path,default=Path('memory_500k/T12'))
+    p.add_argument('--student-block',type=int,default=1);p.add_argument('--teacher-block',type=int,default=12);a=p.parse_args()
     torch.manual_seed(20260916);root=a.root;out=root/a.output_dir;out.mkdir(parents=True,exist_ok=True)
-    keys=json.loads((root/'data/processed_500k/keys.json').read_text(encoding='utf-8'))
-    table_obj=torch.load(root/'memory_500k/T12/table.pt',map_location='cpu',weights_only=True)
+    keys=json.loads((root/a.data_dir/'keys.json').read_text(encoding='utf-8'))
+    table_obj=torch.load(root/a.memory_dir/'table.pt',map_location='cpu',weights_only=True)
     full=table_obj['teacher'];n=min(a.samples,len(keys));order=torch.randperm(len(keys),generator=torch.Generator().manual_seed(17))[:n]
     teacher=full[1:][order].float();perm=torch.randperm(n,generator=torch.Generator().manual_seed(20260915))
     ntrain=int(.7*n);nval=int(.15*n);train=torch.arange(ntrain);val=torch.arange(ntrain,ntrain+nval);test=torch.arange(ntrain+nval,n)
@@ -67,7 +70,7 @@ def main():
             seq=[keys[i]['ids'] for i in order[start:start+512].tolist()];lengths=torch.tensor([len(x) for x in seq])
             width=max(map(len,seq));ids=torch.zeros(len(seq),width,dtype=torch.long);mask=torch.zeros_like(ids)
             for j,row in enumerate(seq):ids[j,:len(row)]=torch.tensor(row);mask[j,:len(row)]=1
-            hidden=model(input_ids=ids.cuda(),attention_mask=mask.cuda(),output_hidden_states=True,use_cache=False).hidden_states[1]
+            hidden=model(input_ids=ids.cuda(),attention_mask=mask.cuda(),output_hidden_states=True,use_cache=False).hidden_states[a.student_block]
             targets.append(hidden[torch.arange(len(seq),device='cuda'),lengths.cuda()-1].float().cpu())
     target=torch.cat(targets);del model;torch.cuda.empty_cache()
     # PCA statistics use train keys only; held-out keys never affect whitening.
@@ -96,7 +99,7 @@ def main():
                                                        a.confirm_steps*2,selected_objective,True)
     state=final.pop('state')
     artifact={'method':selected,'objective':selected_objective,'mean':mean,'components':components,
-              'eigenvalues':eigenvalues,'projection':state,'student_block':1,'teacher_block':12,
+              'eigenvalues':eigenvalues,'projection':state,'student_block':a.student_block,'teacher_block':a.teacher_block,
               'samples':n,'split':{'train':len(train),'validation':len(val),'test':len(test)}}
     torch.save(artifact,out/'projector.pt')
     # Export a compact 1024-d aligned table for the downstream gated experiment.

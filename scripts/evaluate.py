@@ -54,8 +54,11 @@ def main():
         raise ValueError('Memory models require prepared keys.json')
     lm=GraftHFLM(model,tok,keys,a.batch_size,a.memory_mode)
     task_dir=prepare(a.root)
-    manager=TaskManager(include_path=str(task_dir),include_defaults=False)
-    tasks=['graft_'+t.removeprefix('graft_') for t in a.tasks.split(',')]
+    manager=TaskManager(include_path=str(task_dir),include_defaults=True)
+    tasks=[]
+    for task in a.tasks.split(','):
+        task=task.strip()
+        tasks.append(task if task.startswith('mmlu_') else 'graft_'+task.removeprefix('graft_'))
     result=evaluator.simple_evaluate(model=lm,tasks=tasks,task_manager=manager,
             num_fewshot=a.num_fewshot,batch_size=a.batch_size,limit=a.limit,
             log_samples=True,apply_chat_template=False,bootstrap_iters=1000,
