@@ -11,6 +11,7 @@
 
 ## 📢 Latest Updates
 
+- **2026-09-17** — 启动 Biomedical domain pilot：用 Biomed-Enriched 构建领域 memory，以 MMLU Clinical Knowledge 为无泄漏主评测。
 - **2026-09-17** — 重构项目文档，汇总完整实验路径、术语解释和最终证据边界。
 - **2026-09-16** — 完成 aligned memory 的 5M-token 预注册确认：G−S `−0.075 pp`，未复制 2M 正向信号。
 - **2026-09-16** — 完成显式 alignment 与 2M 下游实验：low-LR G−S `+0.238 pp`，三个 seed 均为正。
@@ -266,6 +267,7 @@ remote_results/           harness JSON 与诊断结果
 - [阶段实验索引](docs/experiments/README.md)
 - [显式 alignment 与 5M 确认](docs/experiments/ALIGNMENT_STUDY.md)
 - [三 seed 机制确认](docs/experiments/CONFIRMATION_RESULTS.md)
+- [Biomedical domain pilot](docs/experiments/BIOMEDICAL_STUDY.md)
 - [历史运行记录](docs/RUN_STATUS.md)
 - [原始与汇总评测结果](remote_results/)
 
@@ -282,6 +284,7 @@ remote_results/           harness JSON 与诊断结果
 - [ ] Frequency- and hit-stratified benefit analysis
 - [ ] Task-aware contrastive projection or online alignment loss
 - [ ] Stronger grafting model such as Qwen3.5-35B-A3B
+- [ ] Biomedical domain pilot with MMLU Clinical Knowledge
 
 ## 🙏 Acknowledgements
 
