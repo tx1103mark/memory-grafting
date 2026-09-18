@@ -93,4 +93,6 @@ G−S 在三个 seed 上均为正，说明正确领域 key-row 对应关系比�
 4. 现阶段更适合扩大独立评测题量，或换用更大的医学 benchmark，而不是继续在同一 265 题集合上扫描超参数。
 5. 若继续训练，应预注册更长预算与独立 test，并同时报告 G−S、G−L、逐题配对差异和通用能力保持性。
 
+后续教师层消融比较了 T4/T6/T8/T12。虽然 T4 的 held-out alignment cosine 最高（0.924），只有 T12 在 Clinical 上取得三 seed 全正的 G−S；T4/T6/T8 的平均 G−S 分别为 `−0.629/0.000/−0.503 pp`。因此当前配置继续使用 T12，详见 [Biomedical 教师层消融](BIOMEDICAL_TEACHER_LAYER_STUDY.md)。
+
 原始 harness JSON、诊断和汇总见 [`remote_results/biomedical`](../../remote_results/biomedical)。

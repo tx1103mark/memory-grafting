@@ -124,6 +124,21 @@ CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因
 
 完整协议和结果见 [BIOMEDICAL_STUDY.md](experiments/BIOMEDICAL_STUDY.md)，原始 JSON 见 [remote_results/biomedical](../remote_results/biomedical)。
 
+### 4.9 Biomedical 教师来源层消融
+
+固定学生 S1、2M tokens、aligned low-LR 和三 seed，只改变教师来源层 T4/T6/T8/T12。离线 alignment 随教师层加深而变难：T4/T6/T8/T12 的 held-out cosine 分别为 `0.924/0.914/0.897/0.859`。下游 Clinical Knowledge 排序却相反：
+
+| 教师层 | G−S | G−L | G−S 三 seed 方向 |
+|---|---:|---:|---|
+| T4 | −0.629±0.576 | −0.377±0.998 | 负 / 负 / 平 |
+| T6 | 0.000±0.377 | −0.126±0.950 | 负 / 平 / 正 |
+| T8 | −0.503±0.436 | −0.252±0.436 | 平 / 负 / 负 |
+| T12 | **+0.755±0.654** | **+0.252±0.218** | 正 / 正 / 正 |
+
+所有配对 95% t 区间仍跨 0，但 T12 是唯一在三个 seed 上 G−S 全正且 G−L 不为负的层。T4/T8 的正确表也会产生可测注入和 hit-token loss 变化，说明失败不能简单归因于支路关闭。
+
+这表明浅层教师与 S1 更容易做几何对齐，却未必包含更有用的领域语义。选择教师层不能只看 alignment cosine/CKA/Recall；在本配置下应保留 T12。完整结果见 [BIOMEDICAL_TEACHER_LAYER_STUDY.md](experiments/BIOMEDICAL_TEACHER_LAYER_STUDY.md)。
+
 ## 5. 当前结论
 
 1. 冻结教师 n-gram memory 可以接入 Qwen3-0.6B-Base；构表、continued pretraining、memory on/off 和 `lm-evaluation-harness` 评测链路均已验证。
@@ -131,7 +146,8 @@ CMMLU 没有复现：T12→S1 G 比 L 低 0.65 点，T8→S12 接近持平。因
 3. 教师表示并非不可利用。显式 alignment 在 held-out keys 上明显区分正确与打乱对应，并让正确表在 5M 训练中获得更大的 alpha、注入范数和一致的 hit-token loss 收益。
 4. Aligned memory 在 2M CMMLU 上出现约 +0.23 pp 的三 seed 信号，但预注册 5M 确认没有复制，C-Eval 也没有同步改善。
 5. Biomedical 领域匹配实验在 Clinical Knowledge 上得到三 seed 一致的 G−S 正值，但 G−L 只有约 +0.25 pp 且置信区间跨 0；这是初步领域语义信号，不是稳定能力提升的定论。
-6. 当前证据支持“模型会使用正确 memory，并在领域匹配时产生小幅下游信号”。下一步应扩大独立医学评测题量和任务相关 alignment，而不是只在同一小型选择题集合上扫描超参数。
+6. Biomedical 层位消融中，T12 优于 T4/T6/T8；离线 alignment 更高的浅层并没有带来更高下游准确率。
+7. 当前证据支持“模型会使用正确 memory，并在领域匹配时产生小幅下游信号”。下一步应扩大独立医学评测题量和任务相关 alignment，而不是只在同一小型选择题集合上扫描超参数。
 
 ## 6. 代码与结果索引
 

@@ -11,6 +11,7 @@
 
 ## 📢 Latest Updates
 
+- **2026-09-18** — 完成 Biomedical 教师层消融：T12 是 T4/T6/T8/T12 中唯一 Clinical G−S 三 seed 全正的层；alignment cosine 最高的 T4 下游反而为负。
 - **2026-09-17** — 完成 Biomedical 三 seed 确认：Clinical Knowledge G−S `+0.755 pp`、3/3 正向；G−L `+0.252 pp`、两正一平。
 - **2026-09-17** — 重构项目文档，汇总完整实验路径、术语解释和最终证据边界。
 - **2026-09-16** — 完成 aligned memory 的 5M-token 预注册确认：G−S `−0.075 pp`，未复制 2M 正向信号。
@@ -135,7 +136,9 @@ CMMLU 的逐 seed G−S 为 `−0.163/+0.022/−0.085`，均值 `−0.075 pp`，
 
 G−S 在 seeds 42/43/44 上分别为 `+0.377/+0.377/+1.509 pp`，三个 seed 均为正；G−L 为 `+0.377/0.000/+0.377 pp`。正确表的注入范数也明显高于 shuffled，说明模型利用了领域对应关系。不过 Clinical 只有 265 道题，增益对应 1–4 道题，三个 seed 的配对置信区间仍跨 0。领域数据本身贡献了主要提升，memory 是更小的附加信号。
 
-🔗 [Biomedical 实验设计与完整结果](docs/experiments/BIOMEDICAL_STUDY.md) · [原始结果](remote_results/biomedical/confirmation/summary.json)
+教师来源层消融进一步比较了 T4/T6/T8/T12。T4 的 held-out alignment cosine 最高（0.924），但 Clinical G−S 为 `−0.629 pp`；T6 为 `0.000`，T8 为 `−0.503`，只有 T12 为 `+0.755 pp` 且三 seed 全正。这说明几何上更接近学生 S1 的教师浅层不一定更有用，当前配置保留 T12。
+
+🔗 [Biomedical 实验设计与完整结果](docs/experiments/BIOMEDICAL_STUDY.md) · [教师层消融](docs/experiments/BIOMEDICAL_TEACHER_LAYER_STUDY.md) · [原始结果](remote_results/biomedical_teacher_layers/study/summary.json)
 
 <a id="experiment-roadmap"></a>
 
@@ -154,6 +157,7 @@ G−S 在 seeds 42/43/44 上分别为 `+0.377/+0.377/+1.509 pp`，三个 seed �
 | Aligned 2M | 对齐后是否产生下游收益？ | CMMLU G−S +0.238 pp | ✅ |
 | Aligned 5M | 2M 信号能否独立确认？ | G−S −0.075 pp，确认失败 | ✅ |
 | Biomedical | 领域训练与领域 memory 是否更有效？ | Clinical G−S +0.755 pp，3/3 正向；G−L +0.252 pp | ✅ |
+| Biomedical teacher layer | 哪个教师 block 更好？ | T12 相对最佳；T4/T6/T8 未超过对照 | ✅ |
 | Temporal analysis | 2M 优势何时形成和消失？ | 待运行密集 checkpoint 分析 | ⬜ |
 | Task-aware alignment | 对齐目标能否直接服务下游预测？ | 待实验 | ⬜ |
 

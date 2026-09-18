@@ -1,0 +1,35 @@
+{
+  "checkpoint": "/root/dataDisk/home/tysearch/ngram-embedding/runs/biomedical_layer_G_T4_seed42/last.pt",
+  "tokens": 100000,
+  "loss": {
+    "normal": {
+      "hit": {
+        "mean": 2.6615400726431018,
+        "count": 47811
+      },
+      "miss": {
+        "mean": 2.6043943263696407,
+        "count": 52189
+      }
+    },
+    "zero": {
+      "hit": {
+        "mean": 2.661811695448743,
+        "count": 47811
+      },
+      "miss": {
+        "mean": 2.6043114453304606,
+        "count": 52189
+      }
+    }
+  },
+  "activation_document_mean": {
+    "hit_delta_ratio_mean": 0.005636681902222335,
+    "hit_effective_delta_ratio_mean": 0.006101215425878763,
+    "hit_gate_mean": 0.9999999965429306,
+    "hit_gate_p50": 1.0,
+    "hit_gate_p90": 1.0,
+    "hit_rounded_zero_fraction": 0.1868980098068714
+  },
+  "note": "Activation summaries average per-document statistics. Hit at t predicts target t+1. Miss loss can change through earlier injected context."
+}

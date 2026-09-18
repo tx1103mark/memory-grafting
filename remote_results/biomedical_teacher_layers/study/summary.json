@@ -1,0 +1,1905 @@
+{
+  "protocol": {
+    "teacher_blocks": [
+      4,
+      6,
+      8,
+      12
+    ],
+    "student_block": 1,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "primary": "mmlu_clinical_knowledge"
+  },
+  "alignment": {
+    "4": {
+      "selected_transform": "center",
+      "selected_objective": "mixed",
+      "heldout": {
+        "cosine": 0.9238439798355103,
+        "normalized_mse": 0.00014874229964334518,
+        "recall_at_1": 0.970703125,
+        "recall_at_10": 1.0,
+        "cka": 0.9650420546531677
+      }
+    },
+    "6": {
+      "selected_transform": "center",
+      "selected_objective": "mixed",
+      "heldout": {
+        "cosine": 0.9140408039093018,
+        "normalized_mse": 0.00016788901120889932,
+        "recall_at_1": 0.96142578125,
+        "recall_at_10": 0.99951171875,
+        "cka": 0.9600843787193298
+      }
+    },
+    "8": {
+      "selected_transform": "center",
+      "selected_objective": "cosine",
+      "heldout": {
+        "cosine": 0.8974786400794983,
+        "normalized_mse": 0.00020023701654281467,
+        "recall_at_1": 0.9189453125,
+        "recall_at_10": 0.99560546875,
+        "cka": 0.94915771484375
+      }
+    },
+    "12": {
+      "selected_transform": "center",
+      "selected_objective": "mixed",
+      "heldout": {
+        "cosine": 0.8585337400436401,
+        "normalized_mse": 0.00027630128897726536,
+        "recall_at_1": 0.9501953125,
+        "recall_at_10": 0.99853515625,
+        "cka": 0.9212169647216797
+      }
+    }
+  },
+  "values": {
+    "4": {
+      "42": {
+        "G": {
+          "mmlu_clinical_knowledge": 58.490566037735846,
+          "mmlu_professional_medicine": 50.73529411764706,
+          "mmlu_medical_genetics": 53.0,
+          "mmlu_anatomy": 44.44444444444444,
+          "mmlu_high_school_world_history": 62.0253164556962
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 59.62264150943396,
+          "mmlu_professional_medicine": 48.89705882352941,
+          "mmlu_medical_genetics": 53.0,
+          "mmlu_anatomy": 45.925925925925924,
+          "mmlu_high_school_world_history": 60.75949367088608
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 53.0,
+          "mmlu_anatomy": 47.40740740740741,
+          "mmlu_high_school_world_history": 62.0253164556962
+        }
+      },
+      "43": {
+        "G": {
+          "mmlu_clinical_knowledge": 58.490566037735846,
+          "mmlu_professional_medicine": 47.42647058823529,
+          "mmlu_medical_genetics": 53.0,
+          "mmlu_anatomy": 48.148148148148145,
+          "mmlu_high_school_world_history": 62.0253164556962
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 59.24528301886792,
+          "mmlu_professional_medicine": 47.42647058823529,
+          "mmlu_medical_genetics": 56.99999999999999,
+          "mmlu_anatomy": 42.96296296296296,
+          "mmlu_high_school_world_history": 61.60337552742617
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 58.490566037735846,
+          "mmlu_professional_medicine": 48.529411764705884,
+          "mmlu_medical_genetics": 56.00000000000001,
+          "mmlu_anatomy": 42.96296296296296,
+          "mmlu_high_school_world_history": 61.18143459915611
+        }
+      },
+      "44": {
+        "G": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 54.0,
+          "mmlu_anatomy": 48.888888888888886,
+          "mmlu_high_school_world_history": 62.0253164556962
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 54.0,
+          "mmlu_anatomy": 47.40740740740741,
+          "mmlu_high_school_world_history": 62.447257383966246
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 59.62264150943396,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 52.0,
+          "mmlu_anatomy": 48.148148148148145,
+          "mmlu_high_school_world_history": 61.18143459915611
+        }
+      }
+    },
+    "6": {
+      "42": {
+        "G": {
+          "mmlu_clinical_knowledge": 58.867924528301884,
+          "mmlu_professional_medicine": 50.36764705882353,
+          "mmlu_medical_genetics": 55.00000000000001,
+          "mmlu_anatomy": 44.44444444444444,
+          "mmlu_high_school_world_history": 61.18143459915611
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 59.24528301886792,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 55.00000000000001,
+          "mmlu_anatomy": 45.925925925925924,
+          "mmlu_high_school_world_history": 62.0253164556962
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 53.0,
+          "mmlu_anatomy": 47.40740740740741,
+          "mmlu_high_school_world_history": 62.0253164556962
+        }
+      },
+      "43": {
+        "G": {
+          "mmlu_clinical_knowledge": 59.24528301886792,
+          "mmlu_professional_medicine": 47.42647058823529,
+          "mmlu_medical_genetics": 54.0,
+          "mmlu_anatomy": 45.18518518518518,
+          "mmlu_high_school_world_history": 62.0253164556962
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 59.24528301886792,
+          "mmlu_professional_medicine": 48.161764705882355,
+          "mmlu_medical_genetics": 57.99999999999999,
+          "mmlu_anatomy": 42.96296296296296,
+          "mmlu_high_school_world_history": 62.0253164556962
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 58.490566037735846,
+          "mmlu_professional_medicine": 48.529411764705884,
+          "mmlu_medical_genetics": 56.00000000000001,
+          "mmlu_anatomy": 42.96296296296296,
+          "mmlu_high_school_world_history": 61.18143459915611
+        }
+      },
+      "44": {
+        "G": {
+          "mmlu_clinical_knowledge": 59.62264150943396,
+          "mmlu_professional_medicine": 48.161764705882355,
+          "mmlu_medical_genetics": 52.0,
+          "mmlu_anatomy": 49.629629629629626,
+          "mmlu_high_school_world_history": 61.18143459915611
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 59.24528301886792,
+          "mmlu_professional_medicine": 48.161764705882355,
+          "mmlu_medical_genetics": 54.0,
+          "mmlu_anatomy": 47.40740740740741,
+          "mmlu_high_school_world_history": 61.60337552742617
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 59.62264150943396,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 52.0,
+          "mmlu_anatomy": 48.148148148148145,
+          "mmlu_high_school_world_history": 61.18143459915611
+        }
+      }
+    },
+    "8": {
+      "42": {
+        "G": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 50.0,
+          "mmlu_medical_genetics": 52.0,
+          "mmlu_anatomy": 44.44444444444444,
+          "mmlu_high_school_world_history": 60.337552742616026
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 50.36764705882353,
+          "mmlu_medical_genetics": 54.0,
+          "mmlu_anatomy": 46.666666666666664,
+          "mmlu_high_school_world_history": 61.60337552742617
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 53.0,
+          "mmlu_anatomy": 47.40740740740741,
+          "mmlu_high_school_world_history": 62.0253164556962
+        }
+      },
+      "43": {
+        "G": {
+          "mmlu_clinical_knowledge": 58.490566037735846,
+          "mmlu_professional_medicine": 48.529411764705884,
+          "mmlu_medical_genetics": 55.00000000000001,
+          "mmlu_anatomy": 45.18518518518518,
+          "mmlu_high_school_world_history": 61.60337552742617
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 59.24528301886792,
+          "mmlu_professional_medicine": 48.89705882352941,
+          "mmlu_medical_genetics": 54.0,
+          "mmlu_anatomy": 44.44444444444444,
+          "mmlu_high_school_world_history": 61.18143459915611
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 58.490566037735846,
+          "mmlu_professional_medicine": 48.529411764705884,
+          "mmlu_medical_genetics": 56.00000000000001,
+          "mmlu_anatomy": 42.96296296296296,
+          "mmlu_high_school_world_history": 61.18143459915611
+        }
+      },
+      "44": {
+        "G": {
+          "mmlu_clinical_knowledge": 58.867924528301884,
+          "mmlu_professional_medicine": 48.89705882352941,
+          "mmlu_medical_genetics": 53.0,
+          "mmlu_anatomy": 48.148148148148145,
+          "mmlu_high_school_world_history": 62.0253164556962
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 59.62264150943396,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 52.0,
+          "mmlu_anatomy": 48.888888888888886,
+          "mmlu_high_school_world_history": 60.75949367088608
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 59.62264150943396,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 52.0,
+          "mmlu_anatomy": 48.148148148148145,
+          "mmlu_high_school_world_history": 61.18143459915611
+        }
+      }
+    },
+    "12": {
+      "42": {
+        "G": {
+          "mmlu_clinical_knowledge": 60.37735849056604,
+          "mmlu_professional_medicine": 50.0,
+          "mmlu_medical_genetics": 54.0,
+          "mmlu_anatomy": 45.925925925925924,
+          "mmlu_high_school_world_history": 60.75949367088608
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 50.36764705882353,
+          "mmlu_medical_genetics": 54.0,
+          "mmlu_anatomy": 45.18518518518518,
+          "mmlu_high_school_world_history": 60.75949367088608
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 53.0,
+          "mmlu_anatomy": 47.40740740740741,
+          "mmlu_high_school_world_history": 62.0253164556962
+        }
+      },
+      "43": {
+        "G": {
+          "mmlu_clinical_knowledge": 58.490566037735846,
+          "mmlu_professional_medicine": 48.529411764705884,
+          "mmlu_medical_genetics": 56.99999999999999,
+          "mmlu_anatomy": 42.96296296296296,
+          "mmlu_high_school_world_history": 63.29113924050633
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 58.11320754716981,
+          "mmlu_professional_medicine": 48.161764705882355,
+          "mmlu_medical_genetics": 56.00000000000001,
+          "mmlu_anatomy": 42.96296296296296,
+          "mmlu_high_school_world_history": 62.0253164556962
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 58.490566037735846,
+          "mmlu_professional_medicine": 48.529411764705884,
+          "mmlu_medical_genetics": 56.00000000000001,
+          "mmlu_anatomy": 42.96296296296296,
+          "mmlu_high_school_world_history": 61.18143459915611
+        }
+      },
+      "44": {
+        "G": {
+          "mmlu_clinical_knowledge": 60.0,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 54.0,
+          "mmlu_anatomy": 51.11111111111111,
+          "mmlu_high_school_world_history": 62.0253164556962
+        },
+        "S": {
+          "mmlu_clinical_knowledge": 58.490566037735846,
+          "mmlu_professional_medicine": 48.529411764705884,
+          "mmlu_medical_genetics": 52.0,
+          "mmlu_anatomy": 47.40740740740741,
+          "mmlu_high_school_world_history": 61.18143459915611
+        },
+        "L": {
+          "mmlu_clinical_knowledge": 59.62264150943396,
+          "mmlu_professional_medicine": 49.26470588235294,
+          "mmlu_medical_genetics": 52.0,
+          "mmlu_anatomy": 48.148148148148145,
+          "mmlu_high_school_world_history": 61.18143459915611
+        }
+      }
+    }
+  },
+  "aggregate": {
+    "4": {
+      "mmlu_clinical_knowledge": {
+        "G": {
+          "per_seed": {
+            "42": 58.490566037735846,
+            "43": 58.490566037735846,
+            "44": 60.0
+          },
+          "mean": 58.9937106918239,
+          "std": 0.8714721044371728,
+          "ci95": [
+            56.82885397237168,
+            61.15856741127612
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 59.62264150943396,
+            "43": 59.24528301886792,
+            "44": 60.0
+          },
+          "mean": 59.62264150943397,
+          "std": 0.37735849056603854,
+          "ci95": [
+            58.68523105213444,
+            60.560051966733496
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 60.0,
+            "43": 58.490566037735846,
+            "44": 59.62264150943396
+          },
+          "mean": 59.37106918238993,
+          "std": 0.7855343394211838,
+          "ci95": [
+            57.4196937058855,
+            61.32244465889436
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -1.1320754716981156,
+            "43": -0.7547169811320771,
+            "44": 0.0
+          },
+          "mean": -0.6289308176100642,
+          "std": 0.576424615717717,
+          "ci95": [
+            -2.0608489435494883,
+            0.8029873083293598
+          ],
+          "positive_seeds": 0,
+          "nonnegative_seeds": 1
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -1.5094339622641542,
+            "43": 0.0,
+            "44": 0.37735849056603854
+          },
+          "mean": -0.37735849056603854,
+          "std": 0.9983967211564514,
+          "ci95": [
+            -2.857513436971931,
+            2.102796455839854
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_professional_medicine": {
+        "G": {
+          "per_seed": {
+            "42": 50.73529411764706,
+            "43": 47.42647058823529,
+            "44": 49.26470588235294
+          },
+          "mean": 49.142156862745104,
+          "std": 1.6578124091260658,
+          "ci95": [
+            45.0239225380725,
+            53.26039118741771
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 48.89705882352941,
+            "43": 47.42647058823529,
+            "44": 49.26470588235294
+          },
+          "mean": 48.52941176470588,
+          "std": 0.9727026878913965,
+          "ci95": [
+            46.11308433530308,
+            50.945739194108675
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 49.26470588235294,
+            "43": 48.529411764705884,
+            "44": 49.26470588235294
+          },
+          "mean": 49.01960784313726,
+          "std": 0.42452225675707733,
+          "ci95": [
+            47.96503609560999,
+            50.07417959066453
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 1.838235294117645,
+            "43": 0.0,
+            "44": 0.0
+          },
+          "mean": 0.612745098039215,
+          "std": 1.0613056418926934,
+          "ci95": [
+            -2.0236842707789657,
+            3.2491744668573954
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 3
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 1.470588235294116,
+            "43": -1.102941176470594,
+            "44": 0.0
+          },
+          "mean": 0.12254901960784063,
+          "std": 1.2911340383397985,
+          "ci95": [
+            -3.0848057360771706,
+            3.3299037752928515
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_medical_genetics": {
+        "G": {
+          "per_seed": {
+            "42": 53.0,
+            "43": 53.0,
+            "44": 54.0
+          },
+          "mean": 53.333333333333336,
+          "std": 0.5773502691896258,
+          "ci95": [
+            51.89911575669625,
+            54.767550909970424
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 53.0,
+            "43": 56.99999999999999,
+            "44": 54.0
+          },
+          "mean": 54.666666666666664,
+          "std": 2.0816659994661286,
+          "ci95": [
+            49.495521653929934,
+            59.837811679403394
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 53.0,
+            "43": 56.00000000000001,
+            "44": 52.0
+          },
+          "mean": 53.666666666666664,
+          "std": 2.0816659994661366,
+          "ci95": [
+            48.49552165392991,
+            58.837811679403416
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 0.0,
+            "43": -3.999999999999993,
+            "44": 0.0
+          },
+          "mean": -1.333333333333331,
+          "std": 2.309401076758499,
+          "ci95": [
+            -7.070203639881687,
+            4.403536973215025
+          ],
+          "positive_seeds": 0,
+          "nonnegative_seeds": 2
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 0.0,
+            "43": -3.000000000000007,
+            "44": 2.0
+          },
+          "mean": -0.3333333333333357,
+          "std": 2.5166114784235867,
+          "ci95": [
+            -6.584942812944227,
+            5.918276146277556
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_anatomy": {
+        "G": {
+          "per_seed": {
+            "42": 44.44444444444444,
+            "43": 48.148148148148145,
+            "44": 48.888888888888886
+          },
+          "mean": 47.16049382716049,
+          "std": 2.381148336047642,
+          "ci95": [
+            41.24539344809054,
+            53.075594206230434
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 45.925925925925924,
+            "43": 42.96296296296296,
+            "44": 47.40740740740741
+          },
+          "mean": 45.4320987654321,
+          "std": 2.2630003431880716,
+          "ci95": [
+            39.81049427100326,
+            51.053703259860946
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 47.40740740740741,
+            "43": 42.96296296296296,
+            "44": 48.148148148148145
+          },
+          "mean": 46.17283950617284,
+          "std": 2.8043991831112467,
+          "ci95": [
+            39.20632573634238,
+            53.139353276003305
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -1.481481481481481,
+            "43": 5.185185185185183,
+            "44": 1.4814814814814738
+          },
+          "mean": 1.728395061728392,
+          "std": 3.340185002091032,
+          "ci95": [
+            -6.569084466500845,
+            10.02587458995763
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -2.962962962962969,
+            "43": 5.185185185185183,
+            "44": 0.7407407407407405
+          },
+          "mean": 0.9876543209876516,
+          "std": 4.079681886878596,
+          "ci95": [
+            -9.146837306533348,
+            11.122145948508651
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_high_school_world_history": {
+        "G": {
+          "per_seed": {
+            "42": 62.0253164556962,
+            "43": 62.0253164556962,
+            "44": 62.0253164556962
+          },
+          "mean": 62.02531645569619,
+          "std": 8.702335715267317e-15,
+          "ci95": [
+            62.02531645569617,
+            62.02531645569621
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 60.75949367088608,
+            "43": 61.60337552742617,
+            "44": 62.447257383966246
+          },
+          "mean": 61.60337552742616,
+          "std": 0.843881856540083,
+          "ci95": [
+            59.50705678325422,
+            63.6996942715981
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 62.0253164556962,
+            "43": 61.18143459915611,
+            "44": 61.18143459915611
+          },
+          "mean": 61.46272855133614,
+          "std": 0.4872154170376601,
+          "ci95": [
+            60.25241836008121,
+            62.673038742591075
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 1.2658227848101191,
+            "43": 0.4219409282700326,
+            "44": -0.4219409282700468
+          },
+          "mean": 0.421940928270035,
+          "std": 0.843881856540083,
+          "ci95": [
+            -1.6743778159019047,
+            2.5182596724419746
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 0.0,
+            "43": 0.8438818565400865,
+            "44": 0.8438818565400865
+          },
+          "mean": 0.5625879043600577,
+          "std": 0.4872154170376601,
+          "ci95": [
+            -0.6477222868948749,
+            1.7728980956149902
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 3
+        }
+      }
+    },
+    "6": {
+      "mmlu_clinical_knowledge": {
+        "G": {
+          "per_seed": {
+            "42": 58.867924528301884,
+            "43": 59.24528301886792,
+            "44": 59.62264150943396
+          },
+          "mean": 59.24528301886792,
+          "std": 0.37735849056603854,
+          "ci95": [
+            58.30787256156839,
+            60.18269347616746
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 59.24528301886792,
+            "43": 59.24528301886792,
+            "44": 59.24528301886792
+          },
+          "mean": 59.24528301886792,
+          "std": 0.0,
+          "ci95": [
+            59.24528301886792,
+            59.24528301886792
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 60.0,
+            "43": 58.490566037735846,
+            "44": 59.62264150943396
+          },
+          "mean": 59.37106918238993,
+          "std": 0.7855343394211838,
+          "ci95": [
+            57.4196937058855,
+            61.32244465889436
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -0.37735849056603854,
+            "43": 0.0,
+            "44": 0.37735849056603854
+          },
+          "mean": 0.0,
+          "std": 0.37735849056603854,
+          "ci95": [
+            -0.9374104572995314,
+            0.9374104572995314
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -1.1320754716981156,
+            "43": 0.7547169811320771,
+            "44": 0.0
+          },
+          "mean": -0.12578616352201286,
+          "std": 0.94966470883909,
+          "ci95": [
+            -2.484884080356314,
+            2.233311753312288
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_professional_medicine": {
+        "G": {
+          "per_seed": {
+            "42": 50.36764705882353,
+            "43": 47.42647058823529,
+            "44": 48.161764705882355
+          },
+          "mean": 48.65196078431372,
+          "std": 1.530636764313334,
+          "ci95": [
+            44.84964827494847,
+            52.45427329367897
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 49.26470588235294,
+            "43": 48.161764705882355,
+            "44": 48.161764705882355
+          },
+          "mean": 48.529411764705884,
+          "std": 0.6367833851356159,
+          "ci95": [
+            46.947554143414976,
+            50.11126938599679
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 49.26470588235294,
+            "43": 48.529411764705884,
+            "44": 49.26470588235294
+          },
+          "mean": 49.01960784313726,
+          "std": 0.42452225675707733,
+          "ci95": [
+            47.96503609560999,
+            50.07417959066453
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 1.102941176470587,
+            "43": -0.7352941176470651,
+            "44": 0.0
+          },
+          "mean": 0.12254901960784063,
+          "std": 0.9252248082439666,
+          "ci95": [
+            -2.1758368184844015,
+            2.4209348577000824
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 1.102941176470587,
+            "43": -1.102941176470594,
+            "44": -1.102941176470587
+          },
+          "mean": -0.3676470588235314,
+          "std": 1.2735667702712339,
+          "ci95": [
+            -3.531362301405353,
+            2.7960681837582904
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 1
+        }
+      },
+      "mmlu_medical_genetics": {
+        "G": {
+          "per_seed": {
+            "42": 55.00000000000001,
+            "43": 54.0,
+            "44": 52.0
+          },
+          "mean": 53.666666666666664,
+          "std": 1.5275252316519499,
+          "ci95": [
+            49.87208363292719,
+            57.461249700406135
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 55.00000000000001,
+            "43": 57.99999999999999,
+            "44": 54.0
+          },
+          "mean": 55.666666666666664,
+          "std": 2.0816659994661277,
+          "ci95": [
+            50.49552165392994,
+            60.83781167940339
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 53.0,
+            "43": 56.00000000000001,
+            "44": 52.0
+          },
+          "mean": 53.666666666666664,
+          "std": 2.0816659994661366,
+          "ci95": [
+            48.49552165392991,
+            58.837811679403416
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 0.0,
+            "43": -3.999999999999993,
+            "44": -2.0
+          },
+          "mean": -1.9999999999999976,
+          "std": 1.9999999999999964,
+          "ci95": [
+            -6.968275423687493,
+            2.9682754236874986
+          ],
+          "positive_seeds": 0,
+          "nonnegative_seeds": 1
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 2.000000000000007,
+            "43": -2.000000000000007,
+            "44": 0.0
+          },
+          "mean": 0.0,
+          "std": 2.000000000000007,
+          "ci95": [
+            -4.968275423687523,
+            4.968275423687523
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_anatomy": {
+        "G": {
+          "per_seed": {
+            "42": 44.44444444444444,
+            "43": 45.18518518518518,
+            "44": 49.629629629629626
+          },
+          "mean": 46.419753086419746,
+          "std": 2.8043991831112454,
+          "ci95": [
+            39.45323931658929,
+            53.3862668562502
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 45.925925925925924,
+            "43": 42.96296296296296,
+            "44": 47.40740740740741
+          },
+          "mean": 45.4320987654321,
+          "std": 2.2630003431880716,
+          "ci95": [
+            39.81049427100326,
+            51.053703259860946
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 47.40740740740741,
+            "43": 42.96296296296296,
+            "44": 48.148148148148145
+          },
+          "mean": 46.17283950617284,
+          "std": 2.8043991831112467,
+          "ci95": [
+            39.20632573634238,
+            53.139353276003305
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -1.481481481481481,
+            "43": 2.2222222222222214,
+            "44": 2.2222222222222143
+          },
+          "mean": 0.9876543209876516,
+          "std": 2.1383343303319444,
+          "ci95": [
+            -4.324262629520088,
+            6.299571271495391
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -2.962962962962969,
+            "43": 2.2222222222222214,
+            "44": 1.481481481481481
+          },
+          "mean": 0.24691358024691112,
+          "std": 2.8043991831112494,
+          "ci95": [
+            -6.7196001895835575,
+            7.21342735007738
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_high_school_world_history": {
+        "G": {
+          "per_seed": {
+            "42": 61.18143459915611,
+            "43": 62.0253164556962,
+            "44": 61.18143459915611
+          },
+          "mean": 61.46272855133614,
+          "std": 0.4872154170376601,
+          "ci95": [
+            60.25241836008121,
+            62.673038742591075
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 62.0253164556962,
+            "43": 62.0253164556962,
+            "44": 61.60337552742617
+          },
+          "mean": 61.88466947960618,
+          "std": 0.2436077085188239,
+          "ci95": [
+            61.27951438397873,
+            62.489824575233634
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 62.0253164556962,
+            "43": 61.18143459915611,
+            "44": 61.18143459915611
+          },
+          "mean": 61.46272855133614,
+          "std": 0.4872154170376601,
+          "ci95": [
+            60.25241836008121,
+            62.673038742591075
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -0.8438818565400865,
+            "43": 0.0,
+            "44": -0.4219409282700539
+          },
+          "mean": -0.4219409282700468,
+          "std": 0.42194092827004326,
+          "ci95": [
+            -1.4701003003560211,
+            0.6262184438159275
+          ],
+          "positive_seeds": 0,
+          "nonnegative_seeds": 1
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -0.8438818565400865,
+            "43": 0.8438818565400865,
+            "44": 0.0
+          },
+          "mean": 0.0,
+          "std": 0.8438818565400865,
+          "ci95": [
+            -2.0963187441719486,
+            2.0963187441719486
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        }
+      }
+    },
+    "8": {
+      "mmlu_clinical_knowledge": {
+        "G": {
+          "per_seed": {
+            "42": 60.0,
+            "43": 58.490566037735846,
+            "44": 58.867924528301884
+          },
+          "mean": 59.119496855345915,
+          "std": 0.7855343394211838,
+          "ci95": [
+            57.168121378841484,
+            61.070872331850346
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 60.0,
+            "43": 59.24528301886792,
+            "44": 59.62264150943396
+          },
+          "mean": 59.62264150943397,
+          "std": 0.37735849056603854,
+          "ci95": [
+            58.68523105213444,
+            60.560051966733496
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 60.0,
+            "43": 58.490566037735846,
+            "44": 59.62264150943396
+          },
+          "mean": 59.37106918238993,
+          "std": 0.7855343394211838,
+          "ci95": [
+            57.4196937058855,
+            61.32244465889436
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 0.0,
+            "43": -0.7547169811320771,
+            "44": -0.7547169811320771
+          },
+          "mean": -0.5031446540880514,
+          "std": 0.4357360522185864,
+          "ci95": [
+            -1.5855730138141606,
+            0.5792837056380579
+          ],
+          "positive_seeds": 0,
+          "nonnegative_seeds": 1
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 0.0,
+            "43": 0.0,
+            "44": -0.7547169811320771
+          },
+          "mean": -0.2515723270440257,
+          "std": 0.4357360522185864,
+          "ci95": [
+            -1.334000686770135,
+            0.8308560326820835
+          ],
+          "positive_seeds": 0,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_professional_medicine": {
+        "G": {
+          "per_seed": {
+            "42": 50.0,
+            "43": 48.529411764705884,
+            "44": 48.89705882352941
+          },
+          "mean": 49.142156862745104,
+          "std": 0.7653183821566656,
+          "ci95": [
+            47.24100060806248,
+            51.04331311742773
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 50.36764705882353,
+            "43": 48.89705882352941,
+            "44": 49.26470588235294
+          },
+          "mean": 49.509803921568626,
+          "std": 0.7653183821566656,
+          "ci95": [
+            47.608647666886,
+            51.41096017625125
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 49.26470588235294,
+            "43": 48.529411764705884,
+            "44": 49.26470588235294
+          },
+          "mean": 49.01960784313726,
+          "std": 0.42452225675707733,
+          "ci95": [
+            47.96503609560999,
+            50.07417959066453
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -0.367647058823529,
+            "43": -0.367647058823529,
+            "44": -0.367647058823529
+          },
+          "mean": -0.367647058823529,
+          "std": 0.0,
+          "ci95": [
+            -0.367647058823529,
+            -0.367647058823529
+          ],
+          "positive_seeds": 0,
+          "nonnegative_seeds": 0
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 0.735294117647058,
+            "43": 0.0,
+            "44": -0.367647058823529
+          },
+          "mean": 0.122549019607843,
+          "std": 0.5615901586955679,
+          "ci95": [
+            -1.2725182722081352,
+            1.517616311423821
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_medical_genetics": {
+        "G": {
+          "per_seed": {
+            "42": 52.0,
+            "43": 55.00000000000001,
+            "44": 53.0
+          },
+          "mean": 53.333333333333336,
+          "std": 1.5275252316519505,
+          "ci95": [
+            49.53875029959386,
+            57.127916367072814
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 54.0,
+            "43": 54.0,
+            "44": 52.0
+          },
+          "mean": 53.333333333333336,
+          "std": 1.1547005383792517,
+          "ci95": [
+            50.46489818005915,
+            56.20176848660752
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 53.0,
+            "43": 56.00000000000001,
+            "44": 52.0
+          },
+          "mean": 53.666666666666664,
+          "std": 2.0816659994661366,
+          "ci95": [
+            48.49552165392991,
+            58.837811679403416
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -2.0,
+            "43": 1.000000000000007,
+            "44": 1.0
+          },
+          "mean": 2.3684757858670005e-15,
+          "std": 1.7320508075688792,
+          "ci95": [
+            -4.302652729911277,
+            4.302652729911283
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -1.0,
+            "43": -1.0,
+            "44": 1.0
+          },
+          "mean": -0.3333333333333333,
+          "std": 1.1547005383792517,
+          "ci95": [
+            -3.201768486607517,
+            2.53510181994085
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 1
+        }
+      },
+      "mmlu_anatomy": {
+        "G": {
+          "per_seed": {
+            "42": 44.44444444444444,
+            "43": 45.18518518518518,
+            "44": 48.148148148148145
+          },
+          "mean": 45.925925925925924,
+          "std": 1.9598157859737702,
+          "ci95": [
+            41.057473623721776,
+            50.79437822813007
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 46.666666666666664,
+            "43": 44.44444444444444,
+            "44": 48.888888888888886
+          },
+          "mean": 46.666666666666664,
+          "std": 2.2222222222222214,
+          "ci95": [
+            41.14636064034721,
+            52.18697269298612
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 47.40740740740741,
+            "43": 42.96296296296296,
+            "44": 48.148148148148145
+          },
+          "mean": 46.17283950617284,
+          "std": 2.8043991831112467,
+          "ci95": [
+            39.20632573634238,
+            53.139353276003305
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -2.2222222222222214,
+            "43": 0.7407407407407405,
+            "44": -0.7407407407407405
+          },
+          "mean": -0.7407407407407405,
+          "std": 1.481481481481481,
+          "ci95": [
+            -4.420944758287039,
+            2.9394632768055584
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 1
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -2.962962962962969,
+            "43": 2.2222222222222214,
+            "44": 0.0
+          },
+          "mean": -0.24691358024691587,
+          "std": 2.601395988358704,
+          "ci95": [
+            -6.709139458367823,
+            6.215312297873992
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_high_school_world_history": {
+        "G": {
+          "per_seed": {
+            "42": 60.337552742616026,
+            "43": 61.60337552742617,
+            "44": 62.0253164556962
+          },
+          "mean": 61.32208157524613,
+          "std": 0.8783400841629292,
+          "ci95": [
+            59.140163848352984,
+            63.50399930213928
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 61.60337552742617,
+            "43": 61.18143459915611,
+            "44": 60.75949367088608
+          },
+          "mean": 61.18143459915612,
+          "std": 0.42194092827004326,
+          "ci95": [
+            60.13327522707014,
+            62.229593971242096
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 62.0253164556962,
+            "43": 61.18143459915611,
+            "44": 61.18143459915611
+          },
+          "mean": 61.46272855133614,
+          "std": 0.4872154170376601,
+          "ci95": [
+            60.25241836008121,
+            62.673038742591075
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -1.2658227848101404,
+            "43": 0.4219409282700539,
+            "44": 1.2658227848101191
+          },
+          "mean": 0.14064697609001087,
+          "std": 1.2890508283982727,
+          "ci95": [
+            -3.0615327992175683,
+            3.34282675139759
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -1.687763713080173,
+            "43": 0.4219409282700539,
+            "44": 0.8438818565400865
+          },
+          "mean": -0.14064697609001087,
+          "std": 1.3563503180018277,
+          "ci95": [
+            -3.5100079515096176,
+            3.228713999329596
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        }
+      }
+    },
+    "12": {
+      "mmlu_clinical_knowledge": {
+        "G": {
+          "per_seed": {
+            "42": 60.37735849056604,
+            "43": 58.490566037735846,
+            "44": 60.0
+          },
+          "mean": 59.62264150943397,
+          "std": 0.9983967211564514,
+          "ci95": [
+            57.14248656302808,
+            62.10279645583986
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 60.0,
+            "43": 58.11320754716981,
+            "44": 58.490566037735846
+          },
+          "mean": 58.86792452830188,
+          "std": 0.9983967211564514,
+          "ci95": [
+            56.38776958189599,
+            61.34807947470777
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 60.0,
+            "43": 58.490566037735846,
+            "44": 59.62264150943396
+          },
+          "mean": 59.37106918238993,
+          "std": 0.7855343394211838,
+          "ci95": [
+            57.4196937058855,
+            61.32244465889436
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 0.37735849056603854,
+            "43": 0.37735849056603854,
+            "44": 1.5094339622641542
+          },
+          "mean": 0.7547169811320771,
+          "std": 0.6536040783278797,
+          "ci95": [
+            -0.868925558457087,
+            2.378359520721241
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 0.37735849056603854,
+            "43": 0.0,
+            "44": 0.37735849056603854
+          },
+          "mean": 0.2515723270440257,
+          "std": 0.2178680261092932,
+          "ci95": [
+            -0.28964185281902893,
+            0.7927865069070803
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 3
+        }
+      },
+      "mmlu_professional_medicine": {
+        "G": {
+          "per_seed": {
+            "42": 50.0,
+            "43": 48.529411764705884,
+            "44": 49.26470588235294
+          },
+          "mean": 49.26470588235295,
+          "std": 0.735294117647058,
+          "ci95": [
+            47.438134035409014,
+            51.091277729296884
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 50.36764705882353,
+            "43": 48.161764705882355,
+            "44": 48.529411764705884
+          },
+          "mean": 49.01960784313726,
+          "std": 1.1818199462001158,
+          "ci95": [
+            46.08380434617239,
+            51.955411340102124
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 49.26470588235294,
+            "43": 48.529411764705884,
+            "44": 49.26470588235294
+          },
+          "mean": 49.01960784313726,
+          "std": 0.42452225675707733,
+          "ci95": [
+            47.96503609560999,
+            50.07417959066453
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": -0.367647058823529,
+            "43": 0.367647058823529,
+            "44": 0.735294117647058
+          },
+          "mean": 0.245098039215686,
+          "std": 0.561590158695568,
+          "ci95": [
+            -1.1499692526002923,
+            1.6401653310316644
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 0.735294117647058,
+            "43": 0.0,
+            "44": 0.0
+          },
+          "mean": 0.245098039215686,
+          "std": 0.42452225675707733,
+          "ci95": [
+            -0.8094737083115863,
+            1.2996697867429583
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 3
+        }
+      },
+      "mmlu_medical_genetics": {
+        "G": {
+          "per_seed": {
+            "42": 54.0,
+            "43": 56.99999999999999,
+            "44": 54.0
+          },
+          "mean": 55.0,
+          "std": 1.7320508075688732,
+          "ci95": [
+            50.697347270088734,
+            59.302652729911266
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 54.0,
+            "43": 56.00000000000001,
+            "44": 52.0
+          },
+          "mean": 54.0,
+          "std": 2.0000000000000036,
+          "ci95": [
+            49.031724576312484,
+            58.968275423687516
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 53.0,
+            "43": 56.00000000000001,
+            "44": 52.0
+          },
+          "mean": 53.666666666666664,
+          "std": 2.0816659994661366,
+          "ci95": [
+            48.49552165392991,
+            58.837811679403416
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 0.0,
+            "43": 0.9999999999999858,
+            "44": 2.0
+          },
+          "mean": 0.9999999999999952,
+          "std": 1.0,
+          "ci95": [
+            -1.4841377118437578,
+            3.484137711843748
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 3
+        },
+        "G-L": {
+          "per_seed": {
+            "42": 1.0,
+            "43": 0.9999999999999858,
+            "44": 2.0
+          },
+          "mean": 1.3333333333333286,
+          "std": 0.5773502691896298,
+          "ci95": [
+            -0.1008842433037731,
+            2.7675509099704305
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        }
+      },
+      "mmlu_anatomy": {
+        "G": {
+          "per_seed": {
+            "42": 45.925925925925924,
+            "43": 42.96296296296296,
+            "44": 51.11111111111111
+          },
+          "mean": 46.666666666666664,
+          "std": 4.124269898392607,
+          "ci95": [
+            36.42141227824759,
+            56.91192105508574
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 45.18518518518518,
+            "43": 42.96296296296296,
+            "44": 47.40740740740741
+          },
+          "mean": 45.18518518518519,
+          "std": 2.222222222222225,
+          "ci95": [
+            39.66487915886573,
+            50.70549121150465
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 47.40740740740741,
+            "43": 42.96296296296296,
+            "44": 48.148148148148145
+          },
+          "mean": 46.17283950617284,
+          "std": 2.8043991831112467,
+          "ci95": [
+            39.20632573634238,
+            53.139353276003305
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 0.7407407407407405,
+            "43": 0.0,
+            "44": 3.7037037037036953
+          },
+          "mean": 1.4814814814814785,
+          "std": 1.9598157859737662,
+          "ci95": [
+            -3.3869708207226594,
+            6.349933783685616
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 3
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -1.481481481481488,
+            "43": 0.0,
+            "44": 2.962962962962962
+          },
+          "mean": 0.49382716049382464,
+          "std": 2.2630003431880716,
+          "ci95": [
+            -5.127777333935018,
+            6.115431654922668
+          ],
+          "positive_seeds": 1,
+          "nonnegative_seeds": 2
+        }
+      },
+      "mmlu_high_school_world_history": {
+        "G": {
+          "per_seed": {
+            "42": 60.75949367088608,
+            "43": 63.29113924050633,
+            "44": 62.0253164556962
+          },
+          "mean": 62.025316455696206,
+          "std": 1.2658227848101262,
+          "ci95": [
+            58.88083833943829,
+            65.16979457195411
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "S": {
+          "per_seed": {
+            "42": 60.75949367088608,
+            "43": 62.0253164556962,
+            "44": 61.18143459915611
+          },
+          "mean": 61.32208157524613,
+          "std": 0.6445254141991306,
+          "ci95": [
+            59.72099168759235,
+            62.92317146289991
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "L": {
+          "per_seed": {
+            "42": 62.0253164556962,
+            "43": 61.18143459915611,
+            "44": 61.18143459915611
+          },
+          "mean": 61.46272855133614,
+          "std": 0.4872154170376601,
+          "ci95": [
+            60.25241836008121,
+            62.673038742591075
+          ],
+          "positive_seeds": 3,
+          "nonnegative_seeds": 3
+        },
+        "G-S": {
+          "per_seed": {
+            "42": 0.0,
+            "43": 1.2658227848101333,
+            "44": 0.8438818565400865
+          },
+          "mean": 0.7032348804500733,
+          "std": 0.6445254141991368,
+          "ci95": [
+            -0.8978550072037174,
+            2.304324768103864
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 3
+        },
+        "G-L": {
+          "per_seed": {
+            "42": -1.2658227848101191,
+            "43": 2.10970464135022,
+            "44": 0.8438818565400865
+          },
+          "mean": 0.5625879043600625,
+          "std": 1.7052539596318061,
+          "ci95": [
+            -3.673497765032191,
+            4.798673573752316
+          ],
+          "positive_seeds": 2,
+          "nonnegative_seeds": 2
+        }
+      }
+    }
+  },
+  "ranking_by_primary_g_minus_s_then_g_minus_l": [
+    12,
+    6,
+    8,
+    4
+  ]
+}
