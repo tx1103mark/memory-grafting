@@ -7,7 +7,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "runs/biomedical_teacher_layer_study"
-LAYERS = (4, 6, 8, 12)
+LAYERS = (1, 2, 3, 4, 6, 8, 12)
 SEEDS = (42, 43, 44)
 TASKS = (
     "mmlu_clinical_knowledge",

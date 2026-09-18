@@ -1,5 +1,6 @@
 """Biomedical teacher-source block ablation with fixed student block 1."""
 import concurrent.futures
+import argparse
 import fcntl
 import json
 import os
@@ -79,19 +80,29 @@ def copy_t12_references() -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--layers", type=int, nargs="+", default=list(NEW_LAYERS))
+    args = parser.parse_args()
+    layers = tuple(dict.fromkeys(args.layers))
+    if not layers or any(layer < 1 for layer in layers):
+        raise ValueError("Teacher layers must be positive one-based block numbers")
+    if len(layers) > len(GPUS):
+        raise ValueError(f"At most {len(GPUS)} new layers can be prepared in one run")
     os.chdir(ROOT)
     OUT.mkdir(parents=True, exist_ok=True)
     LOG.mkdir(parents=True, exist_ok=True)
     lock = (OUT / "runner.lock").open("w")
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    (OUT / "complete").unlink(missing_ok=True)
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
-        list(pool.map(prepare_layer, NEW_LAYERS, (2, 3, 4)))
+    preparation_gpus = GPUS[:len(layers)]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=len(preparation_gpus)) as pool:
+        list(pool.map(prepare_layer, layers, preparation_gpus))
     copy_t12_references()
 
     jobs: queue.Queue[tuple[int, int, str]] = queue.Queue()
     for seed in SEEDS:
-        for layer in NEW_LAYERS:
+        for layer in layers:
             for group in ("G", "S"):
                 jobs.put((seed, layer, group))
 

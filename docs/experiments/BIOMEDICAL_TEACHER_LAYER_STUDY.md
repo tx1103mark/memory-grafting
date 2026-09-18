@@ -81,3 +81,17 @@ seed 42 上，T4/T8 正确表关闭后 hit-token loss 分别上升 `0.000272/0.0
 4. 若继续层位研究，下一项更有判别力的实验是 T12 与更深层 T16/T20 的小规模比较，前提是扩大医学评测题量；继续密集扫描 T4–T12 的价值较低。
 
 原始 harness、diagnostic、alignment 和汇总 JSON 位于 [`remote_results/biomedical_teacher_layers`](../../remote_results/biomedical_teacher_layers)。
+
+## T1–T3 浅层扩展：预注册
+
+用户提出“浅层特征应尽早注入”。学生侧 S1 已经是当前实现最早的 block 级注入位置，因此扩展实验补充 T1、T2、T3，并继续固定 S1。Embedding 后、第一层前的 S0 注入属于另一种接口，本轮不与教师来源层变量混合。
+
+- 新增教师层：T1、T2、T3。
+- 保持 60k Biomedical keys、独立 alignment、2M tokens、seeds 42/43/44、G/S 语义对照和共享 L 不变。
+- 主指标与判读规则不变，最终与 T4/T6/T8/T12 一起排序。
+- 若更浅层只有更高 alignment 指标而 G−S/G−L 未改善，则说明表示相似度主要反映层深匹配，不代表领域知识增益。
+- 若 T1–T3 中有层同时满足 G−S 三 seed 全正、G−L 不为负且超过 T12，才替换当前 T12 候选。
+
+```bash
+python -m scripts.run_biomedical_teacher_layer_study --layers 1 2 3
+```
