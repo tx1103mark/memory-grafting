@@ -13,6 +13,6 @@
 | 7 | Three-seed confirmation | [CONFIRMATION_STUDY](CONFIRMATION_STUDY.md) | [CONFIRMATION_RESULTS](CONFIRMATION_RESULTS.md) |
 | 8 | Explicit alignment + 5M confirmation | [ALIGNMENT_STUDY](ALIGNMENT_STUDY.md) | 同文档 |
 | 9 | Biomedical domain pilot | [BIOMEDICAL_STUDY](BIOMEDICAL_STUDY.md) | 三 seed 完成 |
-| 10 | Biomedical teacher block ablation | [BIOMEDICAL_TEACHER_LAYER_STUDY](BIOMEDICAL_TEACHER_LAYER_STUDY.md) | T4–T12 完成；T1–T3 运行中 |
+| 10 | Biomedical teacher block ablation | [BIOMEDICAL_TEACHER_LAYER_STUDY](BIOMEDICAL_TEACHER_LAYER_STUDY.md) | T1–T12 完成；T3 为最佳候选 |
 
 各阶段生成的 harness JSON、paired bootstrap 和诊断结果位于 [`remote_results/`](../../remote_results/)。

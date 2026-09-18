@@ -95,4 +95,6 @@ G−S 在三个 seed 上均为正，说明正确领域 key-row 对应关系比�
 
 后续教师层消融比较了 T4/T6/T8/T12。虽然 T4 的 held-out alignment cosine 最高（0.924），只有 T12 在 Clinical 上取得三 seed 全正的 G−S；T4/T6/T8 的平均 G−S 分别为 `−0.629/0.000/−0.503 pp`。因此当前配置继续使用 T12，详见 [Biomedical 教师层消融](BIOMEDICAL_TEACHER_LAYER_STUDY.md)。
 
+进一步补测 T1/T2/T3 后，T3 得到更高点估计：Clinical G−S `+1.258 pp`、G−L `+0.881 pp`，且 T3 的 G accuracy 三个 seed 均高于 T12。不过 T3 的 G−S 为两正一平，所有 95% 区间仍跨 0。T3 因而升级为下一轮最佳候选，T12 保留为严格三 seed G−S 全正的基线。
+
 原始 harness JSON、诊断和汇总见 [`remote_results/biomedical`](../../remote_results/biomedical)。

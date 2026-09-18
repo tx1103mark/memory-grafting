@@ -11,6 +11,7 @@
 
 ## 📢 Latest Updates
 
+- **2026-09-18** — 补测 T1/T2/T3：T3 成为最佳点估计，Clinical G−S `+1.258 pp`、G−L `+0.881 pp`；但区间仍跨 0。
 - **2026-09-18** — 完成 Biomedical 教师层消融：T12 是 T4/T6/T8/T12 中唯一 Clinical G−S 三 seed 全正的层；alignment cosine 最高的 T4 下游反而为负。
 - **2026-09-17** — 完成 Biomedical 三 seed 确认：Clinical Knowledge G−S `+0.755 pp`、3/3 正向；G−L `+0.252 pp`、两正一平。
 - **2026-09-17** — 重构项目文档，汇总完整实验路径、术语解释和最终证据边界。
@@ -138,6 +139,8 @@ G−S 在 seeds 42/43/44 上分别为 `+0.377/+0.377/+1.509 pp`，三个 seed �
 
 教师来源层消融进一步比较了 T4/T6/T8/T12。T4 的 held-out alignment cosine 最高（0.924），但 Clinical G−S 为 `−0.629 pp`；T6 为 `0.000`，T8 为 `−0.503`，只有 T12 为 `+0.755 pp` 且三 seed 全正。这说明几何上更接近学生 S1 的教师浅层不一定更有用，当前配置保留 T12。
 
+补充 T1/T2/T3 后，T1/T2 的 G−S 均为 `−0.755 pp`，T3 则达到 `+1.258 pp`，G−L 为 `+0.881 pp`。T3 G 在三个 seed 上都高于 T12 G，但 G−S 有一个 seed 持平且置信区间跨 0。因此 T3 是下一轮最佳候选，T12 仍是严格三 seed G−S 全正的基线。
+
 🔗 [Biomedical 实验设计与完整结果](docs/experiments/BIOMEDICAL_STUDY.md) · [教师层消融](docs/experiments/BIOMEDICAL_TEACHER_LAYER_STUDY.md) · [原始结果](remote_results/biomedical_teacher_layers/study/summary.json)
 
 <a id="experiment-roadmap"></a>
@@ -157,7 +160,7 @@ G−S 在 seeds 42/43/44 上分别为 `+0.377/+0.377/+1.509 pp`，三个 seed �
 | Aligned 2M | 对齐后是否产生下游收益？ | CMMLU G−S +0.238 pp | ✅ |
 | Aligned 5M | 2M 信号能否独立确认？ | G−S −0.075 pp，确认失败 | ✅ |
 | Biomedical | 领域训练与领域 memory 是否更有效？ | Clinical G−S +0.755 pp，3/3 正向；G−L +0.252 pp | ✅ |
-| Biomedical teacher layer | 哪个教师 block 更好？ | T12 相对最佳；T4/T6/T8 未超过对照 | ✅ |
+| Biomedical teacher layer | 哪个教师 block 更好？ | T3 点估计最佳；T12 为严格三 seed 正向基线 | ✅ |
 | Temporal analysis | 2M 优势何时形成和消失？ | 待运行密集 checkpoint 分析 | ⬜ |
 | Task-aware alignment | 对齐目标能否直接服务下游预测？ | 待实验 | ⬜ |
 
